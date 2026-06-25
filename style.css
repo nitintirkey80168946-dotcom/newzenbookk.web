@@ -1325,14 +1325,14 @@ p {
               linear-gradient(135deg, #4285f4, #9b51e0, #00ff66) border-box;
 }
 
-/* Black & White Emoji Sticker base styling */
-.feat-icon, .why-icon-wrap, .ledger-icon-wrapper {
-  background: #ffffff !important;
-  border: 2.5px solid #ffffff !important;
-  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.35), 0 0 0 1px rgba(0, 0, 0, 0.06);
+/* Single Color Brand Sticker base styling */
+.feat-icon, .why-icon-wrap, .ledger-icon-wrapper, .blueprint-icon-wrap {
+  background: var(--color-purple) !important;
+  border: 2px solid rgba(255, 255, 255, 0.25) !important;
+  box-shadow: 0 4px 10px rgba(155, 81, 224, 0.3), 0 0 0 1px rgba(255, 255, 255, 0.05);
   border-radius: 50% !important;
-  color: #000000 !important;
-  filter: grayscale(100%) contrast(1.4) brightness(0.9);
+  color: transparent !important;
+  text-shadow: 0 0 0 #ffffff !important; /* Force emoji icon to render as solid white */
   display: flex;
   align-items: center;
   justify-content: center;
@@ -1350,10 +1350,10 @@ p {
 .feature-card-brief:hover .feat-icon,
 .feature-slide.active .feat-icon,
 .why-card:hover .why-icon-wrap,
-.ledger-card:hover .ledger-icon-wrapper {
+.ledger-card:hover .ledger-icon-wrapper,
+.blueprint-card:hover .blueprint-icon-wrap {
   transform: rotate(-10deg) scale(1.12);
-  filter: grayscale(100%) contrast(1.6) brightness(0.95);
-  box-shadow: 0 6px 14px rgba(0, 0, 0, 0.45), 0 0 0 1px rgba(0, 0, 0, 0.06);
+  box-shadow: 0 6px 14px rgba(155, 81, 224, 0.5), 0 0 0 1px rgba(255, 255, 255, 0.05);
 }
 
 /* Micro-animations for active slider cards */
@@ -2227,23 +2227,7 @@ p {
   width: 48px;
   height: 48px;
   font-size: 22px;
-  background: #ffffff !important;
-  border: 2.5px solid #ffffff !important;
-  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.35), 0 0 0 1px rgba(0, 0, 0, 0.06);
-  border-radius: 50% !important;
-  color: #000000 !important;
-  filter: grayscale(100%) contrast(1.4) brightness(0.9);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  transition: all 0.4s cubic-bezier(0.2, 0.8, 0.2, 1);
   margin-bottom: 24px;
-}
-
-.blueprint-card:hover .blueprint-icon-wrap {
-  transform: rotate(-10deg) scale(1.12);
-  filter: grayscale(100%) contrast(1.6) brightness(0.95);
-  box-shadow: 0 6px 14px rgba(0, 0, 0, 0.45), 0 0 0 1px rgba(0, 0, 0, 0.06);
 }
 
 .blueprint-card h3 {
