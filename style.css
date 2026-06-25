@@ -1229,6 +1229,83 @@ body {
   border-top: 1px solid var(--border-glow);
 }
 
+
+/* ==========================================================================
+   REAL BUSINESS USE CASES
+   ========================================================================== */
+
+.usecases-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 24px;
+}
+
+.usecase-card {
+  background: var(--bg-card);
+  backdrop-filter: blur(24px) saturate(180%);
+  -webkit-backdrop-filter: blur(24px) saturate(180%);
+  border: 1px solid var(--border-glow);
+  border-radius: 16px;
+  overflow: hidden;
+  transition: all 0.4s cubic-bezier(0.2, 0.8, 0.2, 1);
+  box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+  display: flex;
+  flex-direction: column;
+}
+
+.usecase-card:hover {
+  transform: translateY(-4px);
+  border-color: var(--border-active);
+  box-shadow: var(--shadow-purple);
+}
+
+.usecase-img-wrapper {
+  width: 100%;
+  height: 200px;
+  overflow: hidden;
+  position: relative;
+}
+
+.usecase-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.6s cubic-bezier(0.2, 0.8, 0.2, 1);
+}
+
+.usecase-card:hover .usecase-img {
+  transform: scale(1.06);
+}
+
+.usecase-content {
+  padding: 24px;
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+}
+
+.usecase-tag {
+  font-size: 10px;
+  font-family: var(--font-mono);
+  font-weight: 700;
+  color: var(--color-purple);
+  text-transform: uppercase;
+  margin-bottom: 8px;
+}
+
+.usecase-content h3 {
+  font-size: 18px;
+  font-family: var(--font-display);
+  margin-bottom: 12px;
+  color: var(--text-primary);
+}
+
+.usecase-content p {
+  font-size: 13.5px;
+  line-height: 1.5;
+  color: var(--text-muted);
+}
+
 /* ==========================================================================
    CONSOLIDATED RESPONSIVE STYLES (Bottom Precedence)
    ========================================================================== */
@@ -1246,7 +1323,7 @@ body {
     font-size: 42px;
   }
   
-  .bento-grid, .blueprint-grid, .pricing-grid {
+  .bento-grid, .blueprint-grid, .pricing-grid, .usecases-grid {
     grid-template-columns: repeat(2, 1fr);
   }
   
@@ -1336,12 +1413,12 @@ body {
 }
 
 @media (max-width: 600px) {
-  .bento-grid, .blueprint-grid, .pricing-grid {
+  .bento-grid, .blueprint-grid, .pricing-grid, .usecases-grid {
     grid-template-columns: 1fr;
     justify-items: center;
   }
   
-  .price-card, .bento-card, .blueprint-card {
+  .price-card, .bento-card, .blueprint-card, .usecase-card {
     width: 100%;
     max-width: 400px;
   }
@@ -1394,7 +1471,7 @@ body {
     font-size: 13px;
   }
   
-  .bento-card, .blueprint-card-inner, .founder-card, .price-card {
+  .bento-card, .blueprint-card-inner, .founder-card, .price-card, .usecase-content {
     padding: 24px 20px !important;
   }
   
