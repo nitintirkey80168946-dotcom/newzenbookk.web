@@ -934,6 +934,26 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   }
 
+  // -- THEME TOGGLE LOGIC --
+  const themeToggle = document.getElementById('theme-toggle');
+  if (themeToggle) {
+    // Check local storage for preference
+    const currentTheme = localStorage.getItem('theme');
+    if (currentTheme === 'light') {
+      document.documentElement.classList.add('light-mode');
+    }
+    
+    themeToggle.addEventListener('click', () => {
+      document.documentElement.classList.toggle('light-mode');
+      
+      let theme = 'dark';
+      if (document.documentElement.classList.contains('light-mode')) {
+        theme = 'light';
+      }
+      localStorage.setItem('theme', theme);
+    });
+  }
+
   // Initialize shader background
   initShaderBackground();
 });
