@@ -1904,6 +1904,23 @@ p {
     transform-origin: center center;
     margin: -20px 0;
   }
+
+  .blueprint-grid {
+    grid-template-columns: 1fr;
+    gap: 32px;
+    max-width: 480px;
+    margin: 0 auto;
+  }
+  
+  .blueprint-card-inner {
+    align-items: center;
+    text-align: center;
+  }
+
+  .blueprint-steps {
+    align-items: flex-start;
+    text-align: left;
+  }
 }
 
 @media (max-width: 768px) {
@@ -2092,6 +2109,10 @@ p {
     grid-template-columns: 1fr;
     gap: 8px;
   }
+
+  .blueprint-card-inner {
+    padding: 24px;
+  }
 }
 
 /* Landscape orientation optimization for mobile height constraint */
@@ -2130,6 +2151,153 @@ p {
   #shader-canvas {
     display: none; /* Disable WebGL in landscape mobile to maximize frame rate */
   }
+}
+
+/* Business Blueprint Section Styles */
+.blueprint-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 24px;
+}
+
+.blueprint-card {
+  position: relative;
+  background: linear-gradient(rgba(20, 21, 33, 0.35), rgba(20, 21, 33, 0.15)) padding-box,
+              linear-gradient(135deg, rgba(255, 255, 255, 0.12), rgba(255, 255, 255, 0.04)) border-box;
+  border: 1px solid transparent;
+  backdrop-filter: blur(24px) saturate(180%);
+  -webkit-backdrop-filter: blur(24px) saturate(180%);
+  border-radius: 20px;
+  box-shadow: 0 4px 30px rgba(0, 0, 0, 0.2);
+  transition: all 0.4s cubic-bezier(0.2, 0.8, 0.2, 1);
+  overflow: visible;
+}
+
+.blueprint-card-inner {
+  padding: 40px;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  z-index: 2;
+}
+
+.blueprint-card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(135deg, rgba(255,255,255,0.03), transparent);
+  pointer-events: none;
+  border-radius: inherit;
+}
+
+/* Shadowglass Glow Effect */
+.blueprint-card-glow {
+  position: absolute;
+  top: 12px;
+  left: 12px;
+  right: 12px;
+  bottom: 12px;
+  background: linear-gradient(135deg, rgba(66, 133, 244, 0.15) 0%, rgba(155, 81, 224, 0.15) 50%, rgba(0, 255, 102, 0.15) 100%);
+  filter: blur(28px);
+  z-index: 1;
+  opacity: 0.7;
+  pointer-events: none;
+  border-radius: inherit;
+  transition: all 0.5s cubic-bezier(0.2, 0.8, 0.2, 1);
+}
+
+.blueprint-card:hover {
+  transform: translateY(-5px);
+  background: linear-gradient(rgba(27, 28, 43, 0.7), rgba(27, 28, 43, 0.5)) padding-box,
+              linear-gradient(135deg, rgba(66, 133, 244, 0.45), rgba(155, 81, 224, 0.45), rgba(0, 255, 102, 0.45)) border-box;
+  box-shadow: inset 0 1px 0 0 rgba(255, 255, 255, 0.1);
+}
+
+.blueprint-card:hover .blueprint-card-glow {
+  opacity: 1;
+  filter: blur(32px);
+  transform: scale(1.03);
+}
+
+.blueprint-icon-wrap {
+  width: 48px;
+  height: 48px;
+  font-size: 22px;
+  background: #ffffff !important;
+  border: 2.5px solid #ffffff !important;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.35), 0 0 0 1px rgba(0, 0, 0, 0.06);
+  border-radius: 50% !important;
+  color: #000000 !important;
+  filter: grayscale(100%) contrast(1.4) brightness(0.9);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.4s cubic-bezier(0.2, 0.8, 0.2, 1);
+  margin-bottom: 24px;
+}
+
+.blueprint-card:hover .blueprint-icon-wrap {
+  transform: rotate(-10deg) scale(1.12);
+  filter: grayscale(100%) contrast(1.6) brightness(0.95);
+  box-shadow: 0 6px 14px rgba(0, 0, 0, 0.45), 0 0 0 1px rgba(0, 0, 0, 0.06);
+}
+
+.blueprint-card h3 {
+  font-size: 20px;
+  color: #fff;
+  margin-bottom: 12px;
+  font-family: var(--font-display);
+}
+
+.blueprint-lead {
+  font-size: 13.5px;
+  font-weight: 600;
+  color: var(--color-blue);
+  margin-bottom: 16px;
+  line-height: 1.4;
+}
+
+.blueprint-body {
+  font-size: 13.5px;
+  line-height: 1.6;
+  color: var(--text-muted);
+}
+
+.blueprint-steps {
+  list-style-type: decimal;
+  padding-left: 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  font-size: 13px;
+  color: var(--text-muted);
+}
+
+.blueprint-steps li {
+  line-height: 1.5;
+}
+
+.blueprint-steps li strong {
+  color: #fff;
+}
+
+:root.light-mode .blueprint-card {
+  background: linear-gradient(rgba(255, 255, 255, 0.45), rgba(255, 255, 255, 0.25)) padding-box,
+              linear-gradient(135deg, rgba(255, 255, 255, 0.5), rgba(255, 255, 255, 0.2)) border-box;
+}
+
+:root.light-mode .blueprint-card h3,
+:root.light-mode .blueprint-steps li strong {
+  color: var(--text-primary);
+}
+
+:root.light-mode .blueprint-card-glow {
+  background: linear-gradient(135deg, rgba(66, 133, 244, 0.1) 0%, rgba(155, 81, 224, 0.1) 50%, rgba(0, 255, 102, 0.1) 100%);
+  opacity: 0.5;
 }
 
 /* Founder Section styles */
