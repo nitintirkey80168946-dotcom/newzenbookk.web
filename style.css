@@ -1386,7 +1386,7 @@ p {
 .feature-card-brief h3 {
   font-size: 20px;
   margin-bottom: 4px;
-  color: #fff;
+  color: var(--text-primary);
 }
 
 .module-title {
@@ -1661,7 +1661,7 @@ p {
 .price-value {
   font-size: 32px;
   font-weight: 700;
-  color: #fff;
+  color: var(--text-primary);
   font-family: var(--font-display);
 }
 .price-value .cycle {
@@ -1883,7 +1883,7 @@ p {
 
 .blueprint-card h3 {
   font-size: 20px;
-  color: #fff;
+  color: var(--text-primary);
   margin-bottom: 12px;
   font-family: var(--font-display);
 }
@@ -1917,17 +1917,12 @@ p {
 }
 
 .blueprint-steps li strong {
-  color: #fff;
+  color: var(--text-primary);
 }
 
 :root.light-mode .blueprint-card {
   background: linear-gradient(rgba(255, 255, 255, 0.45), rgba(255, 255, 255, 0.25)) padding-box,
               linear-gradient(135deg, rgba(255, 255, 255, 0.5), rgba(255, 255, 255, 0.2)) border-box;
-}
-
-:root.light-mode .blueprint-card h3,
-:root.light-mode .blueprint-steps li strong {
-  color: var(--text-primary);
 }
 
 :root.light-mode .blueprint-card-glow {
