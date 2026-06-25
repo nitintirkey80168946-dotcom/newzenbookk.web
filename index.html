@@ -3,35 +3,38 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>NewZenBookK — The New Zeneration of Bookkeeping</title>
+  <title>NewZenBookK — Conversational Bookkeeping & Double-Entry Ledger</title>
+  
   <!-- SEO Meta Tags -->
-  <meta name="description" content="NewZenBookK merges NewZen BookK AI with clean ERP double-entry accounting to make billing, inventory, and GST compliance completely effortless.">
-  <meta name="keywords" content="NewZenBookK, AI accounting, NewZen BookK AI ERP, POS billing, warehouse inventory tracking, GSTR GSTR filing, autonomous double entry">
+  <meta name="description" content="NewZenBookK merges advanced conversational AI with double-entry ledgers to make billing, inventory, and GST compliance completely effortless for modern businesses.">
+  <meta name="keywords" content="NewZenBookK, AI accounting, bookkeeping AI, POS billing, warehouse inventory tracking, GSTR filing, double entry ledger">
   <meta name="author" content="NewZenBookK">
   
-  <!-- Fonts -->
+  <!-- Google Fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Space+Grotesk:wght@400;500;600;700&family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">
   
-  <!-- Style Sheet -->
-  <link rel="stylesheet" href="style.css?v=1.2">
+  <!-- Main Stylesheet -->
+  <link rel="stylesheet" href="style.css">
 </head>
 <body>
 
-  <!-- Animated WebGL Shader Background -->
+  <!-- WebGL Plasma Background Canvas -->
   <canvas id="shader-canvas"></canvas>
 
   <!-- Navigation Bar -->
-  <header class="navbar" id="main-nav">
+  <header class="navbar">
     <div class="nav-container">
-      <a href="#" class="logo" id="nav-logo">
+      <a href="#" class="logo">
         <img src="assets/logo.png" alt="NewZenBookK Logo" class="logo-img">
         <span class="logo-text">NewZenBook<span class="logo-accent">K</span></span>
       </a>
       <nav class="nav-menu" id="nav-links">
         <a href="#features" class="nav-link">Features</a>
         <a href="#why-choose" class="nav-link">Why NewZen</a>
+        <a href="#business-blueprint" class="nav-link">Blueprint</a>
+        <a href="#founder" class="nav-link">Founder</a>
         <a href="#pricing" class="nav-link">Pricing</a>
         <a href="#" class="nav-link" id="nav-link-contact">Contact</a>
       </nav>
@@ -50,1014 +53,412 @@
     </div>
   </header>
 
-  <!-- Sticky 3D Scroll Hero Section -->
-  <main class="hero-scroll-container" id="hero-scroll">
-    <div class="hero-viewport">
-      <div class="hero-scene" id="hero-scene">
-                <!-- LAYER 1: AI Brain Core -->
-        <section class="layer layer-brain active" id="layer-brain" data-depth="0">
-          <div class="layer-content">
-            <div class="text-block">
-              <span class="badge badge-purple">Conversational Bookkeeping</span>
-              <h1 class="main-heading">Accounting,<br>Done by <span class="text-gemini-gradient">AI.</span></h1>
-              <p class="description">
-                Real-time double-entry, billing, and GST compliance. Speak naturally, let AI do the rest.
-              </p>
-
-            </div>
-            
-            <div class="visual-block">
-              <div class="brain-microprocessor-container">
-                <div class="cyber-circles">
-                  <div class="circle circle-outer"></div>
-                  <div class="circle circle-mid"></div>
-                  <div class="circle circle-inner"></div>
-                </div>
-                <div class="chip-frame">
-                  <img src="assets/brain.jpg" alt="NewZen BookK AI Microchip" class="brain-img" id="img-brain-core">
-                  <div class="hologram-overlay"></div>
-                </div>
-                <div class="data-nodes">
-                  <div class="node node-1"></div>
-                  <div class="node node-2"></div>
-                  <div class="node node-3"></div>
-                  <div class="node node-4"></div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </section>
- 
-        <!-- LAYER 2: Conversational Prompt Dashboard -->
-        <section class="layer layer-dashboard" id="layer-dashboard" data-depth="-1500">
-          <div class="layer-content">
-            <div class="text-block">
-              <span class="badge badge-cyan">AI Console</span>
-              <h2 class="sub-heading">Talk to your Ledger.</h2>
-              <p class="description">
-                Type or dictate transactions in plain English. We parse and post them instantly.
-              </p>
-            </div>
-            
-            <div class="visual-block">
-              <div class="dashboard-interface">
-                <div class="dashboard-header">
-                  <div class="window-controls">
-                    <span class="win-btn red"></span>
-                    <span class="win-btn yellow"></span>
-                    <span class="win-btn green"></span>
-                  </div>
-                  <div class="window-title">NewZen BookK AI Console</div>
-                </div>
-                
-                <div class="dashboard-body">
-                  <div class="welcome-user">
-                    <h3 class="user-greeting">Hello, <span class="username">Nitin Tirkey</span></h3>
-                    <p class="user-subtext">How can I help your business today?</p>
-                  </div>
-                  
-                  <!-- Typing Prompt Area -->
-                  <div class="prompt-input-container">
-                    <span class="prompt-symbol">&gt;</span>
-                    <div class="prompt-text-box" id="typing-prompt"></div>
-                    <span class="cursor" id="prompt-cursor">|</span>
-                  </div>
-
-                  <!-- Quick Action Cards Grid (Reference Image 0) -->
-                  <div class="dashboard-cards-grid">
-                    <div class="action-card" id="card-sales-voucher">
-                      <div class="card-glow"></div>
-                      <div class="card-inner">
-                        <h4 class="card-title">Log Sales Voucher</h4>
-                        <p class="card-desc">Sold 5 laptops to Ram with 18% GST</p>
-                        <span class="arrow-right">→</span>
-                      </div>
-                    </div>
-                    
-                    <div class="action-card" id="card-business-expense">
-                      <div class="card-glow"></div>
-                      <div class="card-inner">
-                        <h4 class="card-title">Record Business Expense</h4>
-                        <p class="card-desc">Paid ₹12,000 office rent via Bank</p>
-                        <span class="arrow-right">→</span>
-                      </div>
-                    </div>
-                    
-                    <div class="action-card" id="card-ledger-account">
-                      <div class="card-glow"></div>
-                      <div class="card-inner">
-                        <h4 class="card-title">Create Ledger Account</h4>
-                        <p class="card-desc">Create client, supplier, or expense accounts</p>
-                        <span class="arrow-right">→</span>
-                      </div>
-                    </div>
-                    
-                    <div class="action-card" id="card-check-financials">
-                      <div class="card-glow"></div>
-                      <div class="card-inner">
-                        <h4 class="card-title">Check Financials</h4>
-                        <p class="card-desc">View live Trial Balance and P&L</p>
-                        <span class="arrow-right">→</span>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </section>
-
-        <!-- LAYER 3: Ledger Accounts Grid -->
-        <section class="layer layer-ledger" id="layer-ledger" data-depth="-3000">
-          <div class="layer-content">
-            <div class="text-block">
-              <span class="badge badge-green">Automated Bookkeeping</span>
-              <h2 class="sub-heading">Real-Time Posting.</h2>
-              <p class="description">
-                No manual debit or credit entries. Transactions post to all ledgers instantly.
-              </p>
-            </div>
-            
-            <div class="visual-block">
-              <div class="ledger-interface">
-                <div class="dashboard-header">
-                  <div class="window-controls">
-                    <span class="win-btn red"></span>
-                    <span class="win-btn yellow"></span>
-                    <span class="win-btn green"></span>
-                  </div>
-                  <div class="window-title">Autonomous Double-Entry Ledger</div>
-                  <span class="badge-live-pulse">LIVE</span>
-                </div>
-                
-                <div class="ledger-grid-scroll">
-                  <!-- Ledger cards matching Image 1 -->
-                  <div class="ledger-cards-grid" id="ledger-grid-container">
-                    
-                    <!-- GST Payable A/c -->
-                    <div class="ledger-card" id="ledger-gst-payable">
-                      <div class="ledger-card-header">
-                        <div class="ledger-icon-wrapper red-tint">
-                          <span class="ledger-icon">⚖</span>
-                        </div>
-                        <div class="ledger-meta">
-                          <h4 class="ledger-name">GST Payable A/c</h4>
-                          <span class="ledger-category">Duties & Taxes • <span class="trans-count">4</span> transactions</span>
-                        </div>
-                      </div>
-                      <div class="ledger-balance-section">
-                        <span class="ledger-amount" data-target="0.00">₹0.00</span>
-                        <span class="ledger-type red-text">DR • REAL-TIME</span>
-                      </div>
-                    </div>
-
-                    <!-- SGST Output A/c -->
-                    <div class="ledger-card" id="ledger-sgst-output">
-                      <div class="ledger-card-header">
-                        <div class="ledger-icon-wrapper red-tint">
-                          <span class="ledger-icon">⚖</span>
-                        </div>
-                        <div class="ledger-meta">
-                          <h4 class="ledger-name">SGST Output A/c</h4>
-                          <span class="ledger-category">Duties & Taxes • <span class="trans-count">4</span> transactions</span>
-                        </div>
-                      </div>
-                      <div class="ledger-balance-section">
-                        <span class="ledger-amount" data-target="49643.73">₹49,643.73</span>
-                        <span class="ledger-type red-text">DR • REAL-TIME</span>
-                      </div>
-                    </div>
-
-                    <!-- Cash -->
-                    <div class="ledger-card" id="ledger-cash">
-                      <div class="ledger-card-header">
-                        <div class="ledger-icon-wrapper green-tint">
-                          <span class="ledger-icon">💼</span>
-                        </div>
-                        <div class="ledger-meta">
-                          <h4 class="ledger-name">Cash</h4>
-                          <span class="ledger-category">Cash-in-Hand • <span class="trans-count">8</span> transactions</span>
-                        </div>
-                      </div>
-                      <div class="ledger-balance-section">
-                        <span class="ledger-amount" data-target="408357.82">₹408,357.82</span>
-                        <span class="ledger-type green-text">CR • REAL-TIME</span>
-                      </div>
-                    </div>
-
-                    <!-- Sristy Celluler Infotech -->
-                    <div class="ledger-card" id="ledger-sristy">
-                      <div class="ledger-card-header">
-                        <div class="ledger-icon-wrapper user-tint">
-                          <span class="ledger-icon">👤</span>
-                        </div>
-                        <div class="ledger-meta">
-                          <h4 class="ledger-name">Sristy Celluler Infotech</h4>
-                          <span class="ledger-category">Sundry Creditors • <span class="trans-count">4</span> transactions</span>
-                        </div>
-                      </div>
-                      <div class="ledger-balance-section">
-                        <span class="ledger-amount" data-target="0.00">₹0.00</span>
-                        <span class="ledger-type red-text">DR • REAL-TIME</span>
-                      </div>
-                    </div>
-
-                    <!-- Warish Ansari -->
-                    <div class="ledger-card" id="ledger-warish">
-                      <div class="ledger-card-header">
-                        <div class="ledger-icon-wrapper user-tint">
-                          <span class="ledger-icon">👤</span>
-                        </div>
-                        <div class="ledger-meta">
-                          <h4 class="ledger-name">Warish Ansari</h4>
-                          <span class="ledger-category">Sundry Debtors • <span class="trans-count">3</span> transactions</span>
-                        </div>
-                      </div>
-                      <div class="ledger-balance-section">
-                        <span class="ledger-amount" data-target="100000.00">₹100,000.00</span>
-                        <span class="ledger-type green-text">DR • REAL-TIME</span>
-                      </div>
-                    </div>
-
-                    <!-- Purchase -->
-                    <div class="ledger-card" id="ledger-purchase">
-                      <div class="ledger-card-header">
-                        <div class="ledger-icon-wrapper blue-tint">
-                          <span class="ledger-icon">📥</span>
-                        </div>
-                        <div class="ledger-meta">
-                          <h4 class="ledger-name">Purchase</h4>
-                          <span class="ledger-category">Purchase Accounts • <span class="trans-count">3</span> transactions</span>
-                        </div>
-                      </div>
-                      <div class="ledger-balance-section">
-                        <span class="ledger-amount" data-target="487877.62">₹487,877.62</span>
-                        <span class="ledger-type red-text">DR • REAL-TIME</span>
-                      </div>
-                    </div>
-
-                    <!-- Sales A/c (GST 18%) -->
-                    <div class="ledger-card" id="ledger-sales">
-                      <div class="ledger-card-header">
-                        <div class="ledger-icon-wrapper trend-tint">
-                          <span class="ledger-icon">📈</span>
-                        </div>
-                        <div class="ledger-meta">
-                          <h4 class="ledger-name">Sales A/c (GST 18%)</h4>
-                          <span class="ledger-category">Direct Income • <span class="trans-count">4</span> transactions</span>
-                        </div>
-                      </div>
-                      <div class="ledger-balance-section">
-                        <span class="ledger-amount" data-target="551597.00">₹551,597.00</span>
-                        <span class="ledger-type green-text">DR • REAL-TIME</span>
-                      </div>
-                    </div>
-
-                    <!-- Briskit Roy -->
-                    <div class="ledger-card" id="ledger-briskit">
-                      <div class="ledger-card-header">
-                        <div class="ledger-icon-wrapper user-tint">
-                          <span class="ledger-icon">👤</span>
-                        </div>
-                        <div class="ledger-meta">
-                          <h4 class="ledger-name">Briskit Roy</h4>
-                          <span class="ledger-category">Sundry Creditors • <span class="trans-count">0</span> transactions</span>
-                        </div>
-                      </div>
-                      <div class="ledger-balance-section">
-                        <span class="ledger-amount" data-target="0.00">₹0.00</span>
-                        <span class="ledger-type red-text">DR • REAL-TIME</span>
-                      </div>
-                    </div>
-
-                    <!-- Purchase A/c (GST 18%) -->
-                    <div class="ledger-card" id="ledger-purchase-gst">
-                      <div class="ledger-card-header">
-                        <div class="ledger-icon-wrapper trend-down-tint">
-                          <span class="ledger-icon">📉</span>
-                        </div>
-                        <div class="ledger-meta">
-                          <h4 class="ledger-name">Purchase A/c (GST 18%)</h4>
-                          <span class="ledger-category">Direct Expenses • <span class="trans-count">0</span> transactions</span>
-                        </div>
-                      </div>
-                      <div class="ledger-balance-section">
-                        <span class="ledger-amount" data-target="0.00">₹0.00</span>
-                        <span class="ledger-type red-text">DR • REAL-TIME</span>
-                      </div>
-                    </div>
-
-                    <!-- Diwash -->
-                    <div class="ledger-card" id="ledger-diwash">
-                      <div class="ledger-card-header">
-                        <div class="ledger-icon-wrapper user-tint">
-                          <span class="ledger-icon">👤</span>
-                        </div>
-                        <div class="ledger-meta">
-                          <h4 class="ledger-name">Diwash</h4>
-                          <span class="ledger-category">Sundry Debtors • <span class="trans-count">0</span> transactions</span>
-                        </div>
-                      </div>
-                      <div class="ledger-balance-section">
-                        <span class="ledger-amount" data-target="0.00">₹0.00</span>
-                        <span class="ledger-type green-text">DR • REAL-TIME</span>
-                      </div>
-                    </div>
-
-                    <!-- HDFC Bank -->
-                    <div class="ledger-card" id="ledger-hdfc">
-                      <div class="ledger-card-header">
-                        <div class="ledger-icon-wrapper bank-tint">
-                          <span class="ledger-icon">🏦</span>
-                        </div>
-                        <div class="ledger-meta">
-                          <h4 class="ledger-name">HDFC Bank</h4>
-                          <span class="ledger-category">Bank Accounts • <span class="trans-count">2</span> transactions</span>
-                        </div>
-                      </div>
-                      <div class="ledger-balance-section">
-                        <span class="ledger-amount" data-target="32358.82">₹32,358.82</span>
-                        <span class="ledger-type green-text">DR • REAL-TIME</span>
-                      </div>
-                    </div>
-
-                    <!-- Diwash Biswakarma -->
-                    <div class="ledger-card" id="ledger-diwash-b">
-                      <div class="ledger-card-header">
-                        <div class="ledger-icon-wrapper user-tint">
-                          <span class="ledger-icon">👤</span>
-                        </div>
-                        <div class="ledger-meta">
-                          <h4 class="ledger-name">Diwash Biswakarma</h4>
-                          <span class="ledger-category">Sundry Debtors • <span class="trans-count">2</span> transactions</span>
-                        </div>
-                      </div>
-                      <div class="ledger-balance-section">
-                        <span class="ledger-amount" data-target="0.00">₹0.00</span>
-                        <span class="ledger-type red-text">DR • REAL-TIME</span>
-                      </div>
-                    </div>
-
-                    <!-- Capital Account -->
-                    <div class="ledger-card" id="ledger-capital">
-                      <div class="ledger-card-header">
-                        <div class="ledger-icon-wrapper crown-tint">
-                          <span class="ledger-icon">👑</span>
-                        </div>
-                        <div class="ledger-meta">
-                          <h4 class="ledger-name">Capital Account</h4>
-                          <span class="ledger-category">Capital Account • <span class="trans-count">0</span> transactions</span>
-                        </div>
-                      </div>
-                      <div class="ledger-balance-section">
-                        <span class="ledger-amount" data-target="0.00">₹0.00</span>
-                        <span class="ledger-type green-text">DR • REAL-TIME</span>
-                      </div>
-                    </div>
-
-                    <!-- ACHERJEE COMPUTERS -->
-                    <div class="ledger-card" id="ledger-acherjee">
-                      <div class="ledger-card-header">
-                        <div class="ledger-icon-wrapper user-tint">
-                          <span class="ledger-icon">👤</span>
-                        </div>
-                        <div class="ledger-meta">
-                          <h4 class="ledger-name">ACHERJEE COMPUTERS</h4>
-                          <span class="ledger-category">Sundry Creditors • <span class="trans-count">2</span> transactions</span>
-                        </div>
-                      </div>
-                      <div class="ledger-balance-section">
-                        <span class="ledger-amount" data-target="0.00">₹0.00</span>
-                        <span class="ledger-type red-text">DR • REAL-TIME</span>
-                      </div>
-                    </div>
-
-                    <!-- CGST Input A/c -->
-                    <div class="ledger-card" id="ledger-cgst-input">
-                      <div class="ledger-card-header">
-                        <div class="ledger-icon-wrapper red-tint">
-                          <span class="ledger-icon">⚖</span>
-                        </div>
-                        <div class="ledger-meta">
-                          <h4 class="ledger-name">CGST Input A/c</h4>
-                          <span class="ledger-category">Duties & Taxes • <span class="trans-count">0</span> transactions</span>
-                        </div>
-                      </div>
-                      <div class="ledger-balance-section">
-                        <span class="ledger-amount" data-target="0.00">₹0.00</span>
-                        <span class="ledger-type red-text">DR • REAL-TIME</span>
-                      </div>
-                    </div>
-
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </section>
-
-        <!-- LAYER 4: Interactive Playground & CTA -->
-        <section class="layer layer-cta" id="layer-cta" data-depth="-4500">
-          <div class="layer-content">
-            <div class="text-block">
-              <span class="badge badge-purple">Interactive Sandbox</span>
-              <h2 class="sub-heading">Try it Yourself.</h2>
-              <p class="description">
-                Type a transaction or use a template to see AI bookkeeping in action.
-              </p>
-              
-              <div class="action-buttons-group">
-                <a href="#pricing" class="btn btn-primary">Start Free Trial</a>
-                <a href="#features" class="btn btn-secondary">Explore Features</a>
-              </div>
-            </div>
-            
-            <div class="visual-block">
-              <div class="playground-container" id="sandbox">
-                <div class="playground-header">
-                  <div class="window-controls desktop-only">
-                    <span class="win-btn red"></span>
-                    <span class="win-btn yellow"></span>
-                    <span class="win-btn green"></span>
-                  </div>
-                  <div class="window-title desktop-only">NewZenBookK Playground</div>
-                  <!-- Mobile Device Status Bar -->
-                  <div class="mobile-status-bar mobile-only">
-                    <span class="mobile-time">17:00</span>
-                    <div class="mobile-status-icons">
-                      <span class="status-icon">📶</span>
-                      <span class="status-icon">🔋</span>
-                    </div>
-                  </div>
-                </div>
-                
-                <div class="playground-body">
-                  <p class="playground-instruction">Choose a quick template or type your own transaction:</p>
-                  
-                  <div class="playground-selectors">
-                    <button class="playground-btn active" data-prompt="Sold 5 tea cups to Amit on cash" data-effect="sales">
-                      Cash Sale
-                    </button>
-                    <button class="playground-btn" data-prompt="Paid rent of ₹8,000 by bank" data-effect="expense">
-                      Rent Payment
-                    </button>
-                    <button class="playground-btn" data-prompt="Receive ₹50,000 from client Warish Ansari" data-effect="receipt">
-                      Client Receipt
-                    </button>
-                  </div>
-                  
-                  <div class="playground-terminal">
-                    <div class="terminal-input-wrapper">
-                      <span class="terminal-prompt">AI Chat:</span>
-                      <input type="text" id="playground-input" class="terminal-input-field" value="Sold 5 tea cups to Amit on cash" placeholder="Type e.g., Paid ₹500 for internet bill..." aria-label="Transaction Input">
-                      <button id="playground-mic-btn" class="terminal-action-btn" title="Simulate voice bookkeeping dictation">🎙️</button>
-                      <button id="playground-submit-btn" class="terminal-submit-btn">⚡ Post</button>
-                    </div>
-                    <div class="terminal-line output-line loading" id="terminal-loading" style="display:none;">
-                      <span class="terminal-system">[NewZen BookK AI]</span> Processing natural language...
-                    </div>
-                    <div class="terminal-line output-line success" id="terminal-results">
-                      <!-- Results printed by script -->
-                    </div>
-                  </div>
-                  
-                  <div class="playground-preview-ledger">
-                    <div class="mini-card" id="mini-card-left">
-                      <span class="mini-title" id="mini-left-title">Cash A/c</span>
-                      <span class="mini-val green-text" id="mini-left-val">₹408,357.82</span>
-                    </div>
-                    <div class="mini-card" id="mini-card-right">
-                      <span class="mini-title" id="mini-right-title">Sales A/c</span>
-                      <span class="mini-val green-text" id="mini-right-val">₹551,597.00</span>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </section>
-
-      </div>
-    </div>
-  </main>
-
-  <!-- Core Features Section -->
-  <section class="static-section" id="features">
-    <div class="container">
-      <div class="section-header">
-        <span class="section-badge">Capabilities</span>
-        <h2>Features Built for Speed</h2>
-        <p>A modern, lightweight system for fast-growing businesses.</p>
-      </div>
-      
-      <!-- Slider Animation Product Card Container -->
-      <div class="features-slider-container">
-        <button class="slider-arrow prev-arrow" id="feat-prev" aria-label="Previous Slide">‹</button>
-        
-        <div class="features-slider-viewport">
-          <div class="features-slider-track" id="feat-track">
-            
-            <!-- Slide 1: AI Bookkeeper -->
-            <div class="feature-slide" data-index="0">
-              <div class="feature-card-brief">
-                <div class="feat-icon">💬</div>
-                <h3>AI Bookkeeper</h3>
-                <p class="module-title">AI Chat Console</p>
-                <ul class="feat-bullets">
-                  <li><strong>Natural Language:</strong> Type/dictate entries naturally.</li>
-                  <li><strong>Smart Q&A:</strong> Ask questions about your books.</li>
-                </ul>
-              </div>
-            </div>
-            
-            <!-- Slide 2: POS Billing Terminal -->
-            <div class="feature-slide" data-index="1">
-              <div class="feature-card-brief">
-                <div class="feat-icon">🏪</div>
-                <h3>POS Billing Terminal</h3>
-                <p class="module-title">Voucher Mode Toggle</p>
-                <ul class="feat-bullets">
-                  <li><strong>Dual Mode:</strong> Switch billing and vouchers.</li>
-                  <li><strong>Fast POS:</strong> Barcodes, UPI, split payments.</li>
-                </ul>
-              </div>
-            </div>
-            
-            <!-- Slide 3: Vault Inventory -->
-            <div class="feature-slide" data-index="2">
-              <div class="feature-card-brief">
-                <div class="feat-icon">📦</div>
-                <h3>Vault Inventory</h3>
-                <p class="module-title">Godown Tracking</p>
-                <ul class="feat-bullets">
-                  <li><strong>Multi-Godown:</strong> Track across warehouses.</li>
-                  <li><strong>Production BOM:</strong> Auto-assemble raw stock.</li>
-                </ul>
-              </div>
-            </div>
- 
-            <!-- Slide 4: Portfolio & Analytics -->
-            <div class="feature-slide" data-index="3">
-              <div class="feature-card-brief">
-                <div class="feat-icon">📊</div>
-                <h3>Portfolio & Analytics</h3>
-                <p class="module-title">Financial Performance</p>
-                <ul class="feat-bullets">
-                  <li><strong>Live Reports:</strong> Real-time P&L and Balance Sheet.</li>
-                  <li><strong>Easy Audit:</strong> One-click daybook auditing.</li>
-                </ul>
-              </div>
-            </div>
- 
-            <!-- Slide 5: GST Compliance -->
-            <div class="feature-slide" data-index="4">
-              <div class="feature-card-brief">
-                <div class="feat-icon">📝</div>
-                <h3>GST Compliance</h3>
-                <p class="module-title">Automated Tax Ledger</p>
-                <ul class="feat-bullets">
-                  <li><strong>Auto GST:</strong> Local and interstate tax parsing.</li>
-                  <li><strong>GSTR Filing:</strong> Compliance-ready sheets export.</li>
-                </ul>
-              </div>
-            </div>
- 
-          </div>
-        </div>
- 
-        <button class="slider-arrow next-arrow" id="feat-next" aria-label="Next Slide">›</button>
-        
-        <!-- Dot Navigation Indicators -->
-        <div class="slider-dots" id="feat-dots">
-          <span class="dot active" data-slide="0"></span>
-          <span class="dot" data-slide="1"></span>
-          <span class="dot" data-slide="2"></span>
-          <span class="dot" data-slide="3"></span>
-          <span class="dot" data-slide="4"></span>
-        </div>
-      </div>
-    </div>
-  </section>
- 
-  <!-- Why Choose Section -->
-  <section class="static-section" id="why-choose">
-    <div class="container">
-      <div class="section-header">
-        <span class="section-badge">Why Us</span>
-        <h2>Why NewZenBookK?</h2>
-        <p>Zero learning curve. Instant POS checkout. Automated tax bookkeeping.</p>
-      </div>
-
-      <div class="why-grid">
-        <div class="why-card why-card-wide">
-          <div class="why-icon-wrap">🌟</div>
-          <h4>Zero Accounting Knowledge</h4>
-          <p>Speak naturally. Our AI handles double-entry posting and updates balances automatically.</p>
-        </div>
-
-        <div class="why-card">
-          <div class="why-icon-wrap">⚡</div>
-          <h4>Speedy POS Billing</h4>
-          <p>Built for fast billing, instant databases, split payments, and print support.</p>
-        </div>
-
-        <div class="why-card">
-          <div class="why-icon-wrap">📱</div>
-          <h4>Cross-Device Sync</h4>
-          <p>Access your console and accounts from any phone, tablet, or PC browser instantly.</p>
-        </div>
-
-        <div class="why-card">
-          <div class="why-icon-wrap">⚖</div>
-          <h4>GST Compliant</h4>
-          <p>Transactions auto-route to CGST, SGST, IGST, and Tax Payable ledgers.</p>
-        </div>
-
-        <div class="why-card why-card-wide">
-          <div class="why-icon-wrap">🚀</div>
-          <h4>Pure Performance</h4>
-          <p>Vanilla codebase with zero bulk, instant page loads, and clean typography.</p>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- Cross-Device Ledger Showcase Section -->
-  <section class="static-section" id="cross-device-ledger" style="border-top: 1px solid var(--border-glow); overflow: hidden;">
-    <div class="container">
-      
-      <div class="ledger-showcase-layout">
-        
-        <!-- Text Column -->
-        <div class="ledger-showcase-text">
-          <span class="section-badge">Multi-Device Access</span>
-          <h2>Real-Time Ledger Sync</h2>
-          <p class="description" style="max-width: 100%;">
-            Work seamlessly across desktop and mobile. Your ledgers sync instantly in real-time.
-          </p>
-          
-          <div class="compatibility-badge">
-            <span class="badge-icon">📱</span>
-            <div class="badge-info">
-              <h6>Compatible in Mobile Phones & PCs</h6>
-              <p>Tailored layouts for smartphones, tablets, and desktop browsers.</p>
-            </div>
-          </div>
-          
-          <ul class="compatibility-features">
-            <li><strong>PC & Mobile Ready:</strong> Interfaces built for touch and click.</li>
-            <li><strong>Real-time Sync:</strong> Local network updates with zero lag.</li>
-            <li><strong>Responsive Grids:</strong> Collapses to single-column on mobile.</li>
-          </ul>
-        </div>
-        
-        <!-- Visual Devices Column -->
-        <div class="ledger-showcase-visual">
-          
-          <!-- Desktop Mockup Container -->
-          <div class="showcase-device pc-device">
-            <div class="device-frame-computer"></div>
-            <div class="device-screen">
-              <div class="screen-navbar">
-                <span class="screen-nav-brand"><span class="brand-dot"></span> Ledger (PC)</span>
-                <span class="screen-badge-live pulse-glow">LIVE</span>
-              </div>
-              <div class="screen-dashboard">
-                <div class="screen-ledger-list pc-columns">
-                  
-                  <!-- Card 1 -->
-                  <div class="mini-ledger-card">
-                    <div class="card-left">
-                      <span class="mini-icon">💼</span>
-                      <div>
-                        <h6>Cash A/c</h6>
-                        <span class="card-sub">Cash-in-hand</span>
-                      </div>
-                    </div>
-                    <div class="card-right">
-                      <span class="mini-val">₹408.3K</span>
-                      <span class="mini-status green">CR</span>
-                    </div>
-                  </div>
-
-                  <!-- Card 2 -->
-                  <div class="mini-ledger-card">
-                    <div class="card-left">
-                      <span class="mini-icon">🏦</span>
-                      <div>
-                        <h6>HDFC Bank</h6>
-                        <span class="card-sub">Bank Account</span>
-                      </div>
-                    </div>
-                    <div class="card-right">
-                      <span class="mini-val">₹32.3K</span>
-                      <span class="mini-status green">DR</span>
-                    </div>
-                  </div>
-
-                  <!-- Card 3 -->
-                  <div class="mini-ledger-card">
-                    <div class="card-left">
-                      <span class="mini-icon">⚖</span>
-                      <div>
-                        <h6>SGST Output</h6>
-                        <span class="card-sub">Duties & Taxes</span>
-                      </div>
-                    </div>
-                    <div class="card-right">
-                      <span class="mini-val">₹49.6K</span>
-                      <span class="mini-status red">DR</span>
-                    </div>
-                  </div>
-
-                  <!-- Card 4 (Syncing Demo) -->
-                  <div class="mini-ledger-card sync-card pc-sync-card">
-                    <div class="card-left">
-                      <span class="mini-icon">📈</span>
-                      <div>
-                        <h6>Sales A/c</h6>
-                        <span class="card-sub">Revenue</span>
-                      </div>
-                    </div>
-                    <div class="card-right">
-                      <span class="mini-val">₹184.2K</span>
-                      <span class="mini-status green">CR</span>
-                    </div>
-                  </div>
-
-                </div>
-              </div>
-            </div>
-          </div>
-          
-          <!-- Mobile Mockup Container -->
-          <div class="showcase-device phone-device">
-            <div class="device-frame-phone"></div>
-            <div class="device-screen">
-              <div class="screen-navbar">
-                <span class="screen-nav-brand"><span class="brand-dot"></span> Ledger (Mobile)</span>
-                <span class="screen-badge-live pulse-glow">LIVE</span>
-              </div>
-              <div class="screen-dashboard">
-                <div class="screen-ledger-list mobile-column">
-                  
-                  <!-- Card 1 -->
-                  <div class="mini-ledger-card">
-                    <div class="card-left">
-                      <span class="mini-icon">💼</span>
-                      <div>
-                        <h6>Cash A/c</h6>
-                        <span class="card-sub">Cash-in-hand</span>
-                      </div>
-                    </div>
-                    <div class="card-right">
-                      <span class="mini-val">₹408.3K</span>
-                      <span class="mini-status green">CR</span>
-                    </div>
-                  </div>
-
-                  <!-- Card 2 -->
-                  <div class="mini-ledger-card">
-                    <div class="card-left">
-                      <span class="mini-icon">🏦</span>
-                      <div>
-                        <h6>HDFC Bank</h6>
-                        <span class="card-sub">Bank Account</span>
-                      </div>
-                    </div>
-                    <div class="card-right">
-                      <span class="mini-val">₹32.3K</span>
-                      <span class="mini-status green">DR</span>
-                    </div>
-                  </div>
-
-                  <!-- Card 3 (Syncing Demo) -->
-                  <div class="mini-ledger-card sync-card mobile-sync-card">
-                    <div class="card-left">
-                      <span class="mini-icon">📈</span>
-                      <div>
-                        <h6>Sales A/c</h6>
-                        <span class="card-sub">Revenue</span>
-                      </div>
-                    </div>
-                    <div class="card-right">
-                      <span class="mini-val">₹184.2K</span>
-                      <span class="mini-status green">CR</span>
-                    </div>
-                  </div>
-
-                </div>
-              </div>
-            </div>
-          </div>
-          
-        </div>
-        
-      </div>
-      
-    </div>
-  </section>
-
-  <!-- About Business Section (Why, What, How) -->
-  <section class="static-section" id="business-blueprint" style="border-top: 1px solid var(--border-glow);">
-    <div class="container">
-      <div class="section-header">
-        <span class="section-badge">Business Blueprint</span>
-        <h2>Welcome to NewZen BookK</h2>
-        <p>The architecture behind autonomous, conversational bookkeeping.</p>
-      </div>
-
-      <div class="blueprint-grid">
-        
-        <!-- WHY Card -->
-        <div class="blueprint-card blueprint-why">
-          <div class="blueprint-card-glow"></div>
-          <div class="blueprint-card-inner">
-            <div class="blueprint-icon-wrap">🎯</div>
-            <h3>Why We Exist</h3>
-            <p class="blueprint-lead">Traditional accounting is slow, complex, and manual.</p>
-            <p class="blueprint-body">
-              For decades, business owners had to learn double-entry jargon or hire expensive catalogers just to keep standard ledger compliant. We built NewZenBookK to eliminate this friction entirely.
+  <!-- Main Content -->
+  <main>
+    <!-- Hero Section -->
+    <section class="hero-section" id="hero">
+      <div class="container">
+        <div class="hero-grid">
+          <!-- Hero Text -->
+          <div class="hero-text">
+            <span class="badge badge-purple">Conversational Bookkeeping</span>
+            <h1 class="main-heading">Accounting,<br>Done by <span class="text-gemini-gradient">AI.</span></h1>
+            <p class="description">
+              Real-time double-entry, billing, and GST compliance. Speak naturally, let NewZenBookK AI do the rest.
             </p>
+            <div class="hero-actions">
+              <a href="#pricing" class="btn btn-primary">Start Free Trial</a>
+              <a href="#features" class="btn btn-secondary">Explore Features</a>
+            </div>
+          </div>
+          
+          <!-- Hero Interactive Simulator -->
+          <div class="hero-visual">
+            <div class="simulator-container">
+              <div class="sim-header">
+                <div class="sim-controls">
+                  <span class="sim-dot red"></span>
+                  <span class="sim-dot yellow"></span>
+                  <span class="sim-dot green"></span>
+                </div>
+                <div class="sim-title">NewZen BookK AI Console</div>
+              </div>
+              <div class="sim-body">
+                <div class="sim-greeting">Hello, <span class="username" style="color: var(--color-purple); font-weight: 600;">Nitin Tirkey</span></div>
+                <div class="sim-user" style="font-size: 13px; color: var(--text-muted); margin-bottom: 16px;">How can I help your business today?</div>
+                
+                <!-- Terminal Input & Output -->
+                <div class="sim-terminal">
+                  <div class="terminal-input-wrapper">
+                    <span class="terminal-prompt">AI Chat:</span>
+                    <input type="text" id="sim-input" class="terminal-input-field" value="Sold 5 laptops to Ram Debtor with GST 18%" readonly>
+                    <span class="cursor" id="sim-cursor">|</span>
+                  </div>
+                  <div class="terminal-line" id="sim-results">
+                    <!-- Updated by JS typing simulator -->
+                  </div>
+                </div>
+                
+                <!-- Preset Transaction Selectors -->
+                <div class="sim-selectors">
+                  <button class="sim-btn active" data-prompt="Sold 5 laptops to Ram Debtor with GST 18%">Cash Sale</button>
+                  <button class="sim-btn" data-prompt="Paid office rent ₹12,000 via HDFC bank">Rent Payment</button>
+                  <button class="sim-btn" data-prompt="Received ₹50,000 client fee from Warish Ansari">Client Receipt</button>
+                </div>
+                
+                <!-- Live Preview Ledger Cards -->
+                <div class="sim-preview-ledger">
+                  <div class="mini-card" id="sim-card-left">
+                    <span class="mini-title" id="sim-left-title">Cash A/c</span>
+                    <span class="mini-val" id="sim-left-val">₹0.00</span>
+                  </div>
+                  <div class="mini-card" id="sim-card-right">
+                    <span class="mini-title" id="sim-right-title">Sales A/c</span>
+                    <span class="mini-val" id="sim-right-val">₹0.00</span>
+                  </div>
+                </div>
+              </div>
+            </div>
           </div>
         </div>
-
-        <!-- WHAT Card -->
-        <div class="blueprint-card blueprint-what">
-          <div class="blueprint-card-glow"></div>
-          <div class="blueprint-card-inner">
-            <div class="blueprint-icon-wrap">🧠</div>
-            <h3>What We Built</h3>
-            <p class="blueprint-lead">A bridge between natural speech and double-entry compliance.</p>
-            <p class="blueprint-body">
-              NewZenBookK merges an advanced conversational AI engine with a robust double-entry ledger. It is a full-featured real-time database that translates plain language inputs into verified financial journal entries.
-            </p>
-          </div>
-        </div>
-
-        <!-- HOW Card -->
-        <div class="blueprint-card blueprint-how">
-          <div class="blueprint-card-glow"></div>
-          <div class="blueprint-card-inner">
-            <div class="blueprint-icon-wrap">⚙️</div>
-            <h3>How It Works</h3>
-            <p class="blueprint-lead">Three autonomous steps to a clean general ledger.</p>
-            <ol class="blueprint-steps">
-              <li><strong>Natural Input:</strong> Tell the AI what you did in plain English (voice or text).</li>
-              <li><strong>AI Structuring:</strong> The core parser maps entities, taxes (GST), and ledger accounts in milliseconds.</li>
-              <li><strong>Ledger Posting:</strong> The double-entry ledger records debits/credits instantly across your balance sheet.</li>
-            </ol>
-          </div>
-        </div>
-
       </div>
-    </div>
-  </section>
+    </section>
 
-  <!-- Founder Section -->
-  <section class="static-section" id="founder" style="border-top: 1px solid var(--border-glow);">
-    <div class="container">
-      <div class="founder-card">
-        <div class="founder-avatar-column">
-          <div class="founder-avatar-container">
-            <div class="founder-avatar-glow"></div>
-            <img src="assets/founder.jpg" alt="Nitin Tirkey" class="founder-img" style="width: 100%; height: 100%; object-fit: cover; border-radius: 50%;">
+    <!-- Capabilities / Features Section -->
+    <section class="static-section" id="features">
+      <div class="container">
+        <div class="section-header">
+          <span class="badge badge-purple">Capabilities</span>
+          <h2>Features Built for Speed</h2>
+          <p>A modern, lightweight system for fast-growing businesses.</p>
+        </div>
+        
+        <div class="bento-grid">
+          <!-- Feature 1: AI Bookkeeper -->
+          <div class="bento-card">
+            <div class="sticker-badge">💬</div>
+            <h3>AI Bookkeeper</h3>
+            <p>Type or dictate transactions in plain English. Our AI parses entities, taxes (GST), and ledger accounts in milliseconds.</p>
+            <ul class="bullets-list">
+              <li>Natural language transaction logging</li>
+              <li>Voice dictation bookkeeping support</li>
+            </ul>
           </div>
-          <div class="founder-meta">
-            <h3>Nitin Tirkey</h3>
+          
+          <!-- Feature 2: POS Billing Terminal -->
+          <div class="bento-card">
+            <div class="sticker-badge">🏪</div>
+            <h3>POS Billing Terminal</h3>
+            <p>Switch between billing and vouchers in seconds. Designed for speedy checkouts, barcodes, UPI, and split payments.</p>
+            <ul class="bullets-list">
+              <li>Dual billing & voucher toggling</li>
+              <li>Instant barcode & UPI compliance</li>
+            </ul>
+          </div>
+
+          <!-- Feature 3: Vault Inventory -->
+          <div class="bento-card">
+            <div class="sticker-badge">📦</div>
+            <h3>Vault Inventory</h3>
+            <p>Track warehouse inventory, godowns, and raw stock assemblies (Production BOM) automatically.</p>
+            <ul class="bullets-list">
+              <li>Multi-godown tracking</li>
+              <li>Production Bill of Materials (BOM)</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Why Choose Section (Bento Grid) -->
+    <section class="static-section" id="why-choose">
+      <div class="container">
+        <div class="section-header">
+          <span class="badge badge-cyan">Why Us</span>
+          <h2>Why NewZenBookK?</h2>
+          <p>Zero learning curve. Instant POS checkout. Automated tax bookkeeping.</p>
+        </div>
+
+        <div class="bento-grid">
+          <div class="bento-card bento-card-wide">
+            <div class="sticker-badge">🌟</div>
+            <h3>Zero Accounting Knowledge Required</h3>
+            <p>Speak or write naturally. Our autonomous engine translates conversational entries into verified double-entry ledgers, managing all debits and credits behind the scenes.</p>
+          </div>
+
+          <div class="bento-card">
+            <div class="sticker-badge">⚡</div>
+            <h3>Pure Performance</h3>
+            <p>Built with vanilla code for maximum responsiveness, zero load lag, and premium, clean typography.</p>
+          </div>
+
+          <div class="bento-card">
+            <div class="sticker-badge">📱</div>
+            <h3>Cross-Device Sync</h3>
+            <p>Access your billing console, daybooks, and reports securely from any smartphone, tablet, or desktop browser.</p>
+          </div>
+
+          <div class="bento-card bento-card-wide">
+            <div class="sticker-badge">⚖</div>
+            <h3>Automated GST Compliance</h3>
+            <p>Transactions automatically calculate local and interstate duties, routing tax values into SGST, CGST, IGST, and GST Payable ledgers.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Cross-Device Showcase Section -->
+    <section class="static-section" id="showcase">
+      <div class="container">
+        <div class="showcase-layout">
+          <!-- Text Column -->
+          <div class="showcase-text">
+            <span class="badge badge-purple">Multi-Device Access</span>
+            <h2>Real-Time Ledger Sync</h2>
+            <p class="description">
+              Work seamlessly across desktop and mobile. Your ledgers sync instantly in real-time with zero manual effort.
+            </p>
+            
+            <div class="compatibility-box">
+              <span class="box-icon">📱</span>
+              <div class="box-info">
+                <h5>Compatible with Mobile Phones & PCs</h5>
+                <p>Tailored layouts for smartphones, tablets, and desktop browsers.</p>
+              </div>
+            </div>
+            
+            <ul class="bullets-list">
+              <li><strong>PC & Mobile Ready:</strong> Interfaces built for touch and click actions.</li>
+              <li><strong>Real-time Sync:</strong> Local network updates with zero lag.</li>
+              <li><strong>Responsive Grids:</strong> Layouts collapse to single-column on mobile.</li>
+            </ul>
+          </div>
+          
+          <!-- Visual Devices Column -->
+          <div class="showcase-visual-wrapper">
+            <!-- PC Mockup -->
+            <div class="mockup-device pc-mockup">
+              <div class="mockup-screen-header">
+                <span class="sim-title">Ledger (PC Desktop)</span>
+                <span class="badge-live-pulse" style="font-size: 9px; color: var(--color-green); font-weight: bold;">LIVE</span>
+              </div>
+              <div class="mockup-screen-body">
+                <div class="sync-card pulse-sync">
+                  <span class="sync-card-title">Cash Account</span>
+                  <span class="sync-card-val" id="pc-cash-val">₹4,08,357.82</span>
+                </div>
+                <div class="sync-card">
+                  <span class="sync-card-title">Sales Account</span>
+                  <span class="sync-card-val" id="pc-sales-val">₹5,51,597.00</span>
+                </div>
+                <div class="sync-card">
+                  <span class="sync-card-title">HDFC Bank A/c</span>
+                  <span class="sync-card-val" id="pc-bank-val">₹32,358.82</span>
+                </div>
+              </div>
+            </div>
+            
+            <!-- Phone Mockup -->
+            <div class="mockup-device phone-mockup">
+              <div class="mockup-screen-header">
+                <span class="sim-title">Ledger (Mobile)</span>
+                <span class="badge-live-pulse" style="font-size: 8px; color: var(--color-green); font-weight: bold;">LIVE</span>
+              </div>
+              <div class="mockup-screen-body">
+                <div class="sync-card pulse-sync">
+                  <span class="sync-card-title">Cash Account</span>
+                  <span class="sync-card-val" id="phone-cash-val">₹4,08,357.82</span>
+                </div>
+                <div class="sync-card">
+                  <span class="sync-card-title">Sales Account</span>
+                  <span class="sync-card-val" id="phone-sales-val">₹5,51,597.00</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Inside NewZen Section (Business Blueprint) -->
+    <section class="static-section" id="business-blueprint">
+      <div class="container">
+        <div class="section-header">
+          <span class="badge badge-purple">Business Blueprint</span>
+          <h2>Welcome to NewZen BookK</h2>
+          <p>The architecture behind autonomous, conversational bookkeeping.</p>
+        </div>
+
+        <div class="blueprint-grid">
+          <!-- WHY Card -->
+          <div class="blueprint-card">
+            <div class="blueprint-card-inner">
+              <div class="sticker-badge" style="background: rgba(66, 133, 244, 0.12); border-color: rgba(66, 133, 244, 0.25); text-shadow: 0 0 0 var(--color-blue) !important; color: transparent;">🎯</div>
+              <h3>Why We Exist</h3>
+              <p class="blueprint-lead">Traditional accounting is slow, complex, and manual.</p>
+              <p>
+                For decades, business owners had to learn double-entry jargon or hire expensive catalogers just to keep standard ledgers compliant. We built NewZenBookK to eliminate this friction entirely.
+              </p>
+            </div>
+          </div>
+
+          <!-- WHAT Card -->
+          <div class="blueprint-card">
+            <div class="blueprint-card-inner">
+              <div class="sticker-badge" style="background: rgba(155, 81, 224, 0.12); border-color: rgba(155, 81, 224, 0.25); text-shadow: 0 0 0 var(--color-purple) !important; color: transparent;">🧠</div>
+              <h3>What We Built</h3>
+              <p class="blueprint-lead">A bridge between natural speech and double-entry compliance.</p>
+              <p>
+                NewZenBookK merges an advanced conversational AI engine with a robust double-entry ledger. It is a full-featured real-time database that translates plain language inputs into verified financial journal entries.
+              </p>
+            </div>
+          </div>
+
+          <!-- HOW Card -->
+          <div class="blueprint-card">
+            <div class="blueprint-card-inner">
+              <div class="sticker-badge" style="background: rgba(0, 255, 102, 0.12); border-color: rgba(0, 255, 102, 0.25); text-shadow: 0 0 0 var(--color-green) !important; color: transparent;">⚙️</div>
+              <h3>How It Works</h3>
+              <p class="blueprint-lead">Three autonomous steps to a clean general ledger.</p>
+              <ol class="blueprint-steps">
+                <li><strong>Natural Input:</strong> Tell the AI what you did in plain English (voice or text).</li>
+                <li><strong>AI Structuring:</strong> The core parser maps entities, taxes (GST), and ledger accounts in milliseconds.</li>
+                <li><strong>Ledger Posting:</strong> The double-entry ledger records debits/credits instantly across your balance sheet.</li>
+              </ol>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Founder Section -->
+    <section class="static-section" id="founder">
+      <div class="container">
+        <div class="founder-card">
+          <div class="founder-avatar-col">
+            <div class="founder-avatar-wrap">
+              <img src="assets/founder.jpg" alt="Nitin Tirkey" class="founder-img">
+            </div>
+            <h3 class="founder-name">Nitin Tirkey</h3>
             <p class="founder-title">Founder & Architect</p>
           </div>
-        </div>
-        <div class="founder-info-column">
-          <span class="section-badge">Lead Architect</span>
-          <h2>Meet the Founder</h2>
-          <p class="founder-vision">
-            "We built NewZenBookK to automate bookkeeping. Combining conversational AI with double-entry ledgers lets you manage your business autonomously."
-          </p>
-          <div class="founder-action">
+          <div class="founder-info-col">
+            <span class="badge badge-purple">Lead Architect</span>
+            <h2>Meet the Founder</h2>
+            <p class="founder-vision">
+              "We built NewZenBookK to automate bookkeeping. Combining conversational AI with double-entry ledgers lets you manage your business autonomously."
+            </p>
             <a href="https://nitintirkeyportfolio.netlify.app" target="_blank" rel="noopener noreferrer" class="btn btn-primary">
               Explore Portfolio <span style="margin-left: 8px;">→</span>
             </a>
           </div>
         </div>
       </div>
-    </div>
-  </section>
+    </section>
 
-  <!-- Pricing Plans Section -->
-  <section class="static-section" id="pricing">
-    <div class="container">
-      <div class="section-header">
-        <span class="section-badge">Pricing</span>
-        <h2>Simple Pricing Plans</h2>
-        <p>Free 30-day trial. No credit card required. Cancel anytime.</p>
+    <!-- Pricing Section -->
+    <section class="static-section" id="pricing">
+      <div class="container">
+        <div class="section-header">
+          <span class="badge badge-cyan">Pricing</span>
+          <h2>Simple Pricing Plans</h2>
+          <p>Free 30-day trial. No credit card required. Cancel anytime.</p>
+        </div>
+
+        <!-- Billing Switch -->
+        <div class="pricing-toggle-wrap">
+          <button class="pricing-toggle-btn active" id="toggle-monthly">Monthly Billing</button>
+          <button class="pricing-toggle-btn" id="toggle-yearly">Yearly Billing (Save 16%)</button>
+        </div>
+
+        <div class="pricing-grid">
+          <!-- Starter Plan -->
+          <div class="price-card" data-plan="starter">
+            <div class="price-top">
+              <h3>Starter Plan</h3>
+              <div class="price-value-wrap">
+                <span class="price-value">₹59</span>
+                <span class="price-cycle">/mo</span>
+              </div>
+              <p style="font-size: 13px; color: var(--text-muted);">Freelancers, Micro Businesses</p>
+            </div>
+            <ul class="price-features">
+              <li>100 transactions / mo</li>
+              <li>AI Bookkeeper</li>
+              <li>Single warehouse</li>
+              <li>Real-time financials</li>
+              <li>30-day free trial</li>
+            </ul>
+            <a href="#trial" class="btn btn-secondary btn-card-trial">Start Trial</a>
+          </div>
+
+          <!-- Growth Plan -->
+          <div class="price-card" data-plan="growth">
+            <div class="price-top">
+              <h3>Growth Plan</h3>
+              <div class="price-value-wrap">
+                <span class="price-value">₹99</span>
+                <span class="price-cycle">/mo</span>
+              </div>
+              <p style="font-size: 13px; color: var(--text-muted);">Growing Retail Shops</p>
+            </div>
+            <ul class="price-features">
+              <li>200 transactions / mo</li>
+              <li>AI Bookkeeper</li>
+              <li>POS billing terminal</li>
+              <li>Multi-warehouse tracking</li>
+              <li>30-day free trial</li>
+            </ul>
+            <a href="#trial" class="btn btn-secondary btn-card-trial">Start Trial</a>
+          </div>
+
+          <!-- Pro Plan -->
+          <div class="price-card" data-plan="pro">
+            <div class="price-top">
+              <h3>Pro Plan</h3>
+              <div class="price-value-wrap">
+                <span class="price-value">₹159</span>
+                <span class="price-cycle">/mo</span>
+              </div>
+              <p style="font-size: 13px; color: var(--text-muted);">Established Local Firms</p>
+            </div>
+            <ul class="price-features">
+              <li>300 transactions / mo</li>
+              <li>AI chat console</li>
+              <li>Dual Voucher & POS</li>
+              <li>BOM manufacturing</li>
+              <li>GST-ready GSTR exports</li>
+              <li>30-day free trial</li>
+            </ul>
+            <a href="#trial" class="btn btn-secondary btn-card-trial">Start Trial</a>
+          </div>
+
+          <!-- Unlimited Plan (Recommended) -->
+          <div class="price-card recommended" id="unlimited-card" data-plan="unlimited">
+            <div class="price-top">
+              <span class="badge badge-purple" style="margin-bottom: 12px;">Recommended</span>
+              <h3>Unlimited</h3>
+              <div class="price-value-wrap">
+                <span class="price-value">₹199</span>
+                <span class="price-cycle">/mo</span>
+              </div>
+              <p style="font-size: 13px; color: rgba(255, 255, 255, 0.65);">High-Volume POS Hubs & Firms</p>
+            </div>
+            <ul class="price-features">
+              <li><strong>Unlimited</strong> transactions</li>
+              <li>All AI features</li>
+              <li>POS & Voucher dual-mode</li>
+              <li>Warehouses & BOM</li>
+              <li>GST tax audits</li>
+              <li>24/7 support</li>
+              <li>30-day free trial</li>
+            </ul>
+            <a href="#trial" class="btn btn-primary btn-card-trial">Start Trial</a>
+          </div>
+        </div>
       </div>
-
-      <!-- Billing cycle selection button tabs -->
-      <div class="pricing-toggle-container">
-        <button class="pricing-toggle-btn active" id="toggle-monthly">Monthly Billing</button>
-        <button class="pricing-toggle-btn" id="toggle-yearly">Yearly Billing (Save 16%)</button>
-      </div>
-
-      <div class="pricing-grid" id="pricing-grid">
-        
-        <!-- Starter Plan -->
-        <div class="price-card" data-billing="monthly">
-          <div class="price-header">
-            <h4>Starter Plan</h4>
-            <span class="price-value">₹59<span class="cycle">/mo</span></span>
-            <p class="plan-audience">Freelancers, Micro Businesses</p>
-          </div>
-          <ul class="price-features">
-            <li><strong>100</strong> transactions / mo</li>
-            <li>AI Bookkeeper</li>
-            <li>Single warehouse</li>
-            <li>Real-time financials</li>
-            <li>30-day free trial</li>
-          </ul>
-          <a href="#trial" class="btn btn-secondary btn-full btn-card-trial">Start Trial</a>
-        </div>
-
-        <!-- Growth Plan -->
-        <div class="price-card" data-billing="monthly">
-          <div class="price-header">
-            <h4>Growth Plan</h4>
-            <span class="price-value">₹99<span class="cycle">/mo</span></span>
-            <p class="plan-audience">Growing Retail Shops</p>
-          </div>
-          <ul class="price-features">
-            <li><strong>200</strong> transactions / mo</li>
-            <li>AI Bookkeeper</li>
-            <li>POS billing terminal</li>
-            <li>Multi-warehouse tracking</li>
-            <li>30-day free trial</li>
-          </ul>
-          <a href="#trial" class="btn btn-secondary btn-full btn-card-trial">Start Trial</a>
-        </div>
-
-        <!-- Pro Plan -->
-        <div class="price-card" data-billing="monthly">
-          <div class="price-header">
-            <h4>Pro Plan</h4>
-            <span class="price-value">₹159<span class="cycle">/mo</span></span>
-            <p class="plan-audience">Established Local Firms</p>
-          </div>
-          <ul class="price-features">
-            <li><strong>300</strong> transactions / mo</li>
-            <li>AI chat console</li>
-            <li>Dual Voucher & POS</li>
-            <li>BOM manufacturing</li>
-            <li>GST-ready GSTR exports</li>
-            <li>30-day free trial</li>
-          </ul>
-          <a href="#trial" class="btn btn-secondary btn-full btn-card-trial">Start Trial</a>
-        </div>
-
-        <!-- Unlimited Plan -->
-        <div class="price-card recommended unlimited-card" id="unlimited-card" data-billing="monthly">
-          <div class="recommended-badge">Recommended</div>
-          <div class="price-header">
-            <h4>Unlimited Monthly</h4>
-            <span class="price-value">₹199<span class="cycle">/mo</span></span>
-            <p class="plan-audience">High-Volume POS Hubs & Firms</p>
-          </div>
-          <ul class="price-features">
-            <li><strong>Unlimited</strong> transactions</li>
-            <li>All AI features</li>
-            <li>POS & Voucher dual-mode</li>
-            <li>Warehouses & BOM</li>
-            <li>GST tax audits</li>
-            <li>24/7 support</li>
-            <li>30-day free trial</li>
-          </ul>
-          <a href="#trial" class="btn btn-primary btn-full btn-card-trial">Start Trial</a>
-        </div>
-
-        <!-- Yearly Membership Plan -->
-        <div class="price-card yearly-only-card" id="yearly-membership-card" data-billing="yearly" style="display: none;">
-          <div class="recommended-badge yearly-badge">Best Value (saves 16%)</div>
-          <div class="price-header">
-            <h4>Yearly Membership</h4>
-            <span class="price-value">₹1,999<span class="cycle">/yr</span></span>
-            <p class="plan-audience">All Unlimited Features</p>
-          </div>
-          <ul class="price-features">
-            <li><strong>Unlimited</strong> transactions</li>
-            <li>All AI features</li>
-            <li>POS & Voucher dual-mode</li>
-            <li>Warehouses & BOM</li>
-            <li>GST tax audits</li>
-            <li>24/7 support</li>
-            <li>30-day free trial</li>
-          </ul>
-          <a href="#trial" class="btn btn-secondary btn-full btn-card-trial">Get Yearly Membership</a>
-        </div>
-
-      </div>
-      
-      <p class="pricing-subtext">No credit card details required for the 30-day trial period. Swap plans or terminate at any time.</p>
-    </div>
-  </section>
+    </section>
+  </main>
 
   <!-- Footer -->
   <footer class="footer">
@@ -1075,13 +476,11 @@
           <a href="#features">Features</a>
           <a href="#why-choose">Why NewZen</a>
           <a href="#pricing">Pricing Plans</a>
-          <a href="#sandbox">Console Sandbox</a>
         </div>
         <div class="footer-links">
           <h4>Legal</h4>
           <a href="#">Privacy Policy</a>
           <a href="#">Terms of Service</a>
-          <a href="#">Security Audits</a>
         </div>
       </div>
       <div class="footer-bottom">
@@ -1091,16 +490,16 @@
   </footer>
 
   <!-- Sign-In Modal -->
-  <div class="modal-overlay" id="signin-modal" style="display: none;">
+  <div class="modal-overlay" id="signin-modal">
     <div class="modal-content">
       <button class="modal-close-btn" id="signin-close" aria-label="Close Modal">&times;</button>
       <div class="modal-header">
-        <h2>Sign In to Console</h2>
-        <p>Access your NewZenBookK AI bookkeeping dashboard</p>
+        <h2 style="font-family: var(--font-display); margin-bottom: 8px;">Sign In to Console</h2>
+        <p style="font-size: 13px; color: var(--text-muted); margin-bottom: 24px;">Access your NewZenBookK AI bookkeeping dashboard</p>
       </div>
       
       <!-- Google Sign In -->
-      <button class="btn btn-google" id="btn-google-signin">
+      <button class="btn btn-secondary" id="btn-google-signin" style="width: 100%; display: flex; gap: 12px; margin-bottom: 16px; border-radius: 8px;">
         <svg class="google-icon" viewBox="0 0 24 24" width="18" height="18" xmlns="http://www.w3.org/2000/svg">
           <path d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z" fill="#4285F4"/>
           <path d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z" fill="#34A853"/>
@@ -1110,82 +509,79 @@
         Continue with Google
       </button>
       
-      <div class="modal-divider">
+      <div style="text-align: center; margin: 16px 0; font-size: 11px; text-transform: uppercase; color: var(--text-dark); letter-spacing: 0.05em;">
         <span>or sign in with email</span>
       </div>
       
-      <!-- Email Credentials Form -->
-      <form id="signin-form" class="modal-form">
+      <!-- Email Form -->
+      <form id="signin-form">
         <div class="form-group">
-          <label for="signin-email">Email Address</label>
-          <input type="email" id="signin-email" class="modal-input" placeholder="name@company.com" required>
+          <label class="form-label" for="signin-email">Email Address</label>
+          <input type="email" id="signin-email" class="form-input" placeholder="name@company.com" required>
         </div>
-        <div class="form-group">
-          <label for="signin-password">Password</label>
-          <input type="password" id="signin-password" class="modal-input" placeholder="••••••••" required>
+        <div class="form-group" style="margin-bottom: 24px;">
+          <label class="form-label" for="signin-password">Password</label>
+          <input type="password" id="signin-password" class="form-input" placeholder="••••••••" required>
         </div>
-        <button type="submit" class="btn btn-primary btn-full" id="btn-signin-submit">
-          <span class="btn-text">Sign In</span>
-          <span class="spinner" style="display: none;"></span>
+        <button type="submit" class="btn btn-primary" id="btn-signin-submit" style="width: 100%; border-radius: 8px;">
+          Sign In
         </button>
       </form>
       
-      <div class="modal-footer">
-        <p>New to NewZenBookK? <a href="#pricing" id="modal-signup-link">Start 30-Day Trial</a></p>
+      <div style="text-align: center; margin-top: 20px; font-size: 12px; color: var(--text-muted);">
+        <p>New to NewZenBookK? <a href="#pricing" id="modal-signup-link" style="color: var(--color-purple); text-decoration: none; font-weight: 600;">Start 30-Day Trial</a></p>
       </div>
     </div>
   </div>
 
   <!-- Contact Modal -->
-  <div class="modal-overlay" id="contact-modal" style="display: none;">
+  <div class="modal-overlay" id="contact-modal">
     <div class="modal-content">
       <button class="modal-close-btn" id="contact-close" aria-label="Close Modal">&times;</button>
       <div class="modal-header">
-        <h2>Contact Support</h2>
-        <p>We're here to help you automate your bookkeeping</p>
+        <h2 style="font-family: var(--font-display); margin-bottom: 8px;">Contact Support</h2>
+        <p style="font-size: 13px; color: var(--text-muted); margin-bottom: 24px;">We're here to help you automate your bookkeeping</p>
       </div>
       
-      <!-- Direct Mail link -->
-      <div class="contact-email-wrapper">
-        <span class="email-icon">✉</span>
-        <div class="email-meta">
-          <span class="email-label">Send us an email directly</span>
-          <a href="mailto:support@newzenbookk.com" class="email-link">support@newzenbookk.com</a>
+      <!-- Contact Info -->
+      <div style="background: var(--bg-card-inner); border: 1px solid var(--border-glow); border-radius: 8px; padding: 14px; display: flex; align-items: center; gap: 12px; margin-bottom: 20px;">
+        <span style="font-size: 24px;">✉</span>
+        <div>
+          <div style="font-size: 11px; text-transform: uppercase; color: var(--text-dark); font-weight: 700;">Direct Email Support</div>
+          <a href="mailto:support@newzenbookk.com" style="color: var(--color-purple); font-size: 13px; text-decoration: none; font-weight: 600;">support@newzenbookk.com</a>
         </div>
       </div>
       
-      <div class="modal-divider">
+      <div style="text-align: center; margin: 16px 0; font-size: 11px; text-transform: uppercase; color: var(--text-dark); letter-spacing: 0.05em;">
         <span>or send us a message</span>
       </div>
       
       <!-- Contact Form -->
-      <form id="contact-form" class="modal-form">
+      <form id="contact-form">
         <div class="form-group">
-          <label for="contact-name">Full Name</label>
-          <input type="text" id="contact-name" class="modal-input" placeholder="Nitin Tirkey" required>
+          <label class="form-label" for="contact-name">Full Name</label>
+          <input type="text" id="contact-name" class="form-input" placeholder="Nitin Tirkey" required>
         </div>
         <div class="form-group">
-          <label for="contact-user-email">Email Address</label>
-          <input type="email" id="contact-user-email" class="modal-input" placeholder="you@example.com" required>
+          <label class="form-label" for="contact-user-email">Email Address</label>
+          <input type="email" id="contact-user-email" class="form-input" placeholder="you@example.com" required>
         </div>
-        <div class="form-group">
-          <label for="contact-message">Your Message</label>
-          <textarea id="contact-message" class="modal-input modal-textarea" placeholder="How can we assist you?" required></textarea>
+        <div class="form-group" style="margin-bottom: 24px;">
+          <label class="form-label" for="contact-message">Your Message</label>
+          <textarea id="contact-message" class="form-input form-textarea" placeholder="How can we assist you?" required></textarea>
         </div>
-        <button type="submit" class="btn btn-primary btn-full" id="btn-contact-submit">
-          <span class="btn-text">Send Message</span>
-          <span class="spinner" style="display: none;"></span>
+        <button type="submit" class="btn btn-primary" id="btn-contact-submit" style="width: 100%; border-radius: 8px;">
+          Send Message
         </button>
       </form>
       
-      <div class="contact-success-msg" id="contact-success" style="display: none;">
-        <span class="success-icon">✓</span>
-        <p>Message sent successfully! Our support team will reach out within 2 hours.</p>
+      <div class="contact-success-msg" id="contact-success" style="display: none; text-align: center; margin-top: 16px; color: var(--color-green); font-size: 13px; font-weight: 600;">
+        <span style="font-size: 18px; margin-right: 4px;">✓</span> Message sent! We'll reply within 2 hours.
       </div>
     </div>
   </div>
 
-  <!-- Script Sheet -->
+  <!-- Main JavaScript File -->
   <script src="app.js"></script>
 </body>
 </html>
