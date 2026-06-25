@@ -1926,6 +1926,7 @@ p {
 @media (max-width: 768px) {
   .hamburger-menu {
     display: flex;
+    margin-left: 20px;
   }
 
   .slider-arrow {
@@ -1995,6 +1996,18 @@ p {
     font-size: 13px;
   }
 
+  .section-header {
+    margin-bottom: 40px;
+  }
+  
+  .section-header h2 {
+    font-size: 28px;
+  }
+  
+  .section-header p {
+    font-size: 14px;
+  }
+
   .main-heading {
     font-size: 32px;
     line-height: 1.15;
@@ -2013,11 +2026,15 @@ p {
   .dashboard-interface {
     transform: scale(0.68);
     margin: -50px 0;
+    width: 520px !important;
+    max-width: none !important;
   }
   
   .ledger-interface {
     transform: scale(0.6);
     margin: -65px 0;
+    width: 600px !important;
+    max-width: none !important;
   }
   
   .playground-container {
@@ -2025,7 +2042,7 @@ p {
     transform-origin: center center;
     margin: -35px auto !important;
     width: 480px !important;
-    max-width: 100% !important;
+    max-width: none !important;
   }
   
   .ledger-cards-grid {
@@ -2039,6 +2056,57 @@ p {
 }
 
 @media (max-width: 480px) {
+  .nav-container {
+    padding: 12px 16px !important;
+  }
+
+  .logo-text {
+    font-size: 16px !important;
+  }
+
+  .logo-img {
+    width: 24px !important;
+    height: 24px !important;
+    margin-right: 6px !important;
+  }
+
+  .section-header {
+    margin-bottom: 30px;
+  }
+  
+  .section-header h2 {
+    font-size: 24px;
+  }
+  
+  .section-header p {
+    font-size: 13px;
+  }
+
+  .why-card h4 {
+    font-size: 16px !important;
+  }
+
+  .feature-card-brief h3,
+  .blueprint-card h3 {
+    font-size: 18px !important;
+  }
+
+  .why-card {
+    padding: 24px 20px !important;
+  }
+  
+  .why-icon-wrap {
+    margin-bottom: 16px !important;
+  }
+
+  .feature-card-brief {
+    padding: 24px 20px !important;
+  }
+  
+  .feat-icon {
+    margin-bottom: 16px !important;
+  }
+
   .main-heading {
     font-size: 28px;
   }
@@ -2088,23 +2156,29 @@ p {
   .dashboard-interface {
     transform: scale(0.56);
     margin: -70px 0;
+    width: 520px !important;
+    max-width: none !important;
   }
   
   .ledger-interface {
     transform: scale(0.5);
     margin: -80px 0;
+    width: 600px !important;
+    max-width: none !important;
   }
   
   .playground-container {
-    transform: scale(0.68) !important;
+    transform: scale(0.62) !important;
     transform-origin: center center;
     margin: -55px auto !important;
     width: 480px !important;
-    max-width: 100% !important;
+    max-width: none !important;
   }
+  
   .playground-body {
     padding: 12px 14px;
   }
+  
   .playground-preview-ledger {
     grid-template-columns: 1fr;
     gap: 8px;
@@ -2112,6 +2186,49 @@ p {
 
   .blueprint-card-inner {
     padding: 24px;
+  }
+  
+  .blueprint-icon-wrap {
+    margin-bottom: 16px !important;
+  }
+
+  .founder-card {
+    padding: 24px 20px !important;
+    gap: 20px !important;
+  }
+  
+  .founder-vision {
+    font-size: 14px !important;
+    margin: 12px 0 20px !important;
+  }
+}
+
+@media (max-width: 360px) {
+  .brain-microprocessor-container {
+    transform: scale(0.45);
+    margin: -90px 0;
+  }
+  
+  .dashboard-interface {
+    transform: scale(0.5);
+    margin: -85px 0;
+    width: 520px !important;
+    max-width: none !important;
+  }
+  
+  .ledger-interface {
+    transform: scale(0.45);
+    margin: -95px 0;
+    width: 600px !important;
+    max-width: none !important;
+  }
+  
+  .playground-container {
+    transform: scale(0.56) !important;
+    transform-origin: center center;
+    margin: -65px auto !important;
+    width: 480px !important;
+    max-width: none !important;
   }
 }
 
@@ -3069,13 +3186,16 @@ p {
   }
   
   .ledger-showcase-visual {
-    margin: 0 auto;
-    max-width: 520px;
+    margin: 0 auto !important;
+    width: 500px !important;
+    max-width: none !important;
   }
 }
 
 @media (max-width: 600px) {
   .ledger-showcase-visual {
+    width: 500px !important;
+    max-width: none !important;
     transform: scale(0.72) !important;
     transform-origin: center center;
     margin: -60px auto !important;
@@ -3085,6 +3205,8 @@ p {
 
 @media (max-width: 480px) {
   .ledger-showcase-visual {
+    width: 500px !important;
+    max-width: none !important;
     transform: scale(0.55) !important;
     transform-origin: center center;
     margin: -100px auto !important;
@@ -3111,10 +3233,23 @@ p {
 
 @media (max-width: 380px) {
   .ledger-showcase-visual {
+    width: 500px !important;
+    max-width: none !important;
     transform: scale(0.45) !important;
     transform-origin: center center;
     margin: -120px auto !important;
     height: 220px;
+  }
+}
+
+@media (max-width: 340px) {
+  .ledger-showcase-visual {
+    width: 500px !important;
+    max-width: none !important;
+    transform: scale(0.4) !important;
+    transform-origin: center center;
+    margin: -130px auto !important;
+    height: 200px;
   }
 }
 
