@@ -74,13 +74,13 @@ document.addEventListener('DOMContentLoaded', () => {
       starter: { val: '₹59', cycle: '/mo' },
       growth: { val: '₹99', cycle: '/mo' },
       pro: { val: '₹159', cycle: '/mo' },
-      unlimited: { val: '₹199', cycle: '/mo' }
+      unlimited: { val: '₹199', cycle: '/mo', title: 'Unlimited', desc: 'High-Volume POS Hubs & Firms' }
     },
     yearly: {
-      starter: { val: '₹49', cycle: '/mo (billed ₹590/yr)' },
-      growth: { val: '₹79', cycle: '/mo (billed ₹950/yr)' },
-      pro: { val: '₹129', cycle: '/mo (billed ₹1,550/yr)' },
-      unlimited: { val: '₹159', cycle: '/mo (billed ₹1,900/yr)' }
+      starter: { val: '₹59', cycle: '/mo' },
+      growth: { val: '₹99', cycle: '/mo' },
+      pro: { val: '₹159', cycle: '/mo' },
+      unlimited: { val: '₹1,999', cycle: '/yr', title: 'Yearly Membership', desc: 'Unlimited features for a full year' }
     }
   };
 
@@ -93,6 +93,15 @@ document.addEventListener('DOMContentLoaded', () => {
         if (valEl && cycleEl) {
           valEl.textContent = pricingData[billingCycle][plan].val;
           cycleEl.textContent = pricingData[billingCycle][plan].cycle;
+        }
+        
+        if (plan === 'unlimited') {
+          const titleEl = document.getElementById('unlimited-title');
+          const descEl = document.getElementById('unlimited-desc');
+          if (titleEl && descEl) {
+            titleEl.textContent = pricingData[billingCycle][plan].title;
+            descEl.textContent = pricingData[billingCycle][plan].desc;
+          }
         }
       }
     });
