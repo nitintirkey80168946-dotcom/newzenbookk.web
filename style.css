@@ -896,74 +896,7 @@ body {
   50% { border-color: var(--color-green); }
 }
 
-/* ==========================================================================
-   FOUNDER SECTION
-   ========================================================================== */
 
-.founder-card {
-  display: grid;
-  grid-template-columns: 1fr 1.8fr;
-  gap: 50px;
-  background: var(--bg-card);
-  border: 1px solid var(--border-glow);
-  border-radius: 24px;
-  padding: 48px;
-  align-items: center;
-  position: relative;
-}
-
-.founder-avatar-col {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  text-align: center;
-}
-
-.founder-avatar-wrap {
-  width: 140px;
-  height: 140px;
-  border-radius: 50%;
-  position: relative;
-  margin-bottom: 16px;
-  background: linear-gradient(135deg, var(--color-purple), var(--color-blue));
-  padding: 3px;
-}
-
-.founder-img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  border-radius: 50%;
-}
-
-.founder-name {
-  font-size: 22px;
-  font-family: var(--font-display);
-  font-weight: 700;
-  margin-bottom: 4px;
-}
-
-.founder-title {
-  font-size: 12px;
-  color: var(--color-blue);
-  font-weight: 600;
-  text-transform: uppercase;
-  font-family: var(--font-mono);
-}
-
-.founder-info-col {
-  display: flex;
-  flex-direction: column;
-  align-items: flex-start;
-}
-
-.founder-vision {
-  font-size: 18px;
-  line-height: 1.6;
-  color: var(--text-muted);
-  margin: 16px 0 24px 0;
-  font-style: italic;
-}
 
 /* ==========================================================================
    PRICING PLANS
@@ -1391,19 +1324,9 @@ body {
     max-width: 100%;
   }
   
-  .showcase-layout, .founder-card {
+  .showcase-layout {
     grid-template-columns: 1fr;
     gap: 40px;
-  }
-  
-  .founder-avatar-col {
-    border-bottom: 1px solid var(--border-glow);
-    padding-bottom: 24px;
-  }
-  
-  .founder-info-col {
-    align-items: center;
-    text-align: center;
   }
   
   .showcase-text {
@@ -1471,7 +1394,7 @@ body {
     font-size: 13px;
   }
   
-  .bento-card, .blueprint-card-inner, .founder-card, .price-card, .usecase-content {
+  .bento-card, .blueprint-card-inner, .price-card, .usecase-content {
     padding: 24px 20px !important;
   }
   
@@ -1479,12 +1402,8 @@ body {
     margin-bottom: 16px !important;
   }
   
-  .bento-card h3, .bento-card h4, .blueprint-card h3, .founder-name {
+  .bento-card h3, .bento-card h4, .blueprint-card h3 {
     font-size: 18px !important;
-  }
-  
-  .founder-vision {
-    font-size: 14px !important;
   }
   
   .showcase-visual-wrapper {
