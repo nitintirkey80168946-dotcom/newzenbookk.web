@@ -103,21 +103,24 @@ body {
 
 .navbar {
   position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
+  top: 16px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: calc(100% - 32px);
+  max-width: 1200px;
   z-index: 1000;
   background: var(--bg-nav);
-  backdrop-filter: blur(16px);
-  -webkit-backdrop-filter: blur(16px);
-  border-bottom: 1px solid var(--border-glow);
-  transition: background 0.3s ease, border-color 0.3s ease;
+  backdrop-filter: blur(24px) saturate(190%);
+  -webkit-backdrop-filter: blur(24px) saturate(190%);
+  border: 1px solid var(--border-glow);
+  border-radius: 20px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+  transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
 .nav-container {
-  max-width: 1200px;
-  margin: 0 auto;
-  padding: 16px 24px;
+  width: 100%;
+  padding: 12px 24px;
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -363,6 +366,7 @@ body {
   font-family: var(--font-display);
   line-height: 1.1;
   margin-bottom: 24px;
+  letter-spacing: -0.03em;
 }
 
 .description {
@@ -388,10 +392,11 @@ body {
   backdrop-filter: blur(24px) saturate(180%);
   -webkit-backdrop-filter: blur(24px) saturate(180%);
   border: 1px solid var(--border-glow);
-  border-radius: 16px;
+  border-radius: 20px;
   overflow: hidden;
   box-shadow: var(--shadow-premium);
   transition: border-color 0.5s ease, box-shadow 0.5s ease;
+  position: relative;
 }
 
 .simulator-container:hover {
@@ -400,8 +405,8 @@ body {
 }
 
 .sim-header {
-  background: rgba(255, 255, 255, 0.03);
-  padding: 14px 20px;
+  background: linear-gradient(to bottom, rgba(255, 255, 255, 0.06) 0%, rgba(255, 255, 255, 0.01) 100%);
+  padding: 12px 20px;
   border-bottom: 1px solid var(--border-glow);
   display: flex;
   align-items: center;
@@ -595,11 +600,35 @@ body {
   font-size: 36px;
   font-family: var(--font-display);
   margin-bottom: 16px;
+  letter-spacing: -0.02em;
 }
 
 .section-header p {
   font-size: 16px;
   color: var(--text-muted);
+}
+
+/* Gloss Sweep Shine Animation */
+.bento-card::after, .price-card::after, .usecase-card::after, .simulator-container::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -150%;
+  width: 150%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.05), transparent);
+  transform: skewX(-20deg);
+  pointer-events: none;
+  z-index: 10;
+}
+
+.bento-card:hover::after, .price-card:hover::after, .usecase-card:hover::after, .simulator-container:hover::after {
+  animation: diagonal-sweep 1.2s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+@keyframes diagonal-sweep {
+  0% { left: -150%; }
+  100% { left: 150%; }
 }
 
 /* ==========================================================================
@@ -617,7 +646,7 @@ body {
   backdrop-filter: blur(24px) saturate(180%);
   -webkit-backdrop-filter: blur(24px) saturate(180%);
   border: 1px solid var(--border-glow);
-  border-radius: 16px;
+  border-radius: 20px;
   padding: 32px;
   transition: all 0.4s cubic-bezier(0.2, 0.8, 0.2, 1);
   display: flex;
@@ -718,7 +747,7 @@ body {
   position: relative;
   background: var(--bg-card);
   border: 1px solid var(--border-glow);
-  border-radius: 16px;
+  border-radius: 20px;
   overflow: hidden;
   box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
   transition: all 0.4s cubic-bezier(0.2, 0.8, 0.2, 1);
@@ -904,30 +933,33 @@ body {
 
 .pricing-toggle-wrap {
   display: flex;
-  justify-content: center;
-  align-items: center;
-  gap: 12px;
-  margin-bottom: 40px;
+  width: fit-content;
+  margin: 0 auto 40px auto;
+  background: rgba(0, 0, 0, 0.25);
+  border: 1px solid var(--border-glow);
+  padding: 4px;
+  border-radius: 30px;
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
 }
 
 .pricing-toggle-btn {
-  background: rgba(255, 255, 255, 0.03);
-  border: 1px solid var(--border-glow);
+  background: transparent;
+  border: none;
   color: var(--text-muted);
-  padding: 10px 24px;
+  padding: 8px 24px;
   border-radius: 20px;
-  font-size: 14px;
+  font-size: 13px;
   font-weight: 600;
   cursor: pointer;
-  transition: all 0.3s ease;
+  transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
   outline: none;
 }
 
 .pricing-toggle-btn.active {
-  background: var(--color-purple);
-  color: #fff;
-  border-color: var(--color-purple);
-  box-shadow: 0 0 15px rgba(155, 81, 224, 0.3);
+  background: var(--text-primary);
+  color: var(--bg-color);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
 }
 
 .pricing-grid {
@@ -940,7 +972,7 @@ body {
 .price-card {
   background: var(--bg-card);
   border: 1px solid var(--border-glow);
-  border-radius: 16px;
+  border-radius: 20px;
   padding: 40px 28px;
   display: flex;
   flex-direction: column;
@@ -1041,7 +1073,7 @@ body {
 .modal-content {
   background: var(--bg-card);
   border: 1px solid var(--border-glow);
-  border-radius: 16px;
+  border-radius: 20px;
   padding: 40px;
   max-width: 480px;
   width: 90%;
@@ -1178,7 +1210,7 @@ body {
   backdrop-filter: blur(24px) saturate(180%);
   -webkit-backdrop-filter: blur(24px) saturate(180%);
   border: 1px solid var(--border-glow);
-  border-radius: 16px;
+  border-radius: 20px;
   overflow: hidden;
   transition: all 0.4s cubic-bezier(0.2, 0.8, 0.2, 1);
   box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
