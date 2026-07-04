@@ -539,6 +539,114 @@ document.addEventListener('DOMContentLoaded', () => {
     requestAnimationFrame(render);
   }
 
+  /* ==========================================================================
+     AI COMPANION ROBOT INTERACTION ENGINE
+     ========================================================================== */
+  const botEl = document.getElementById('ai-companion');
+  const botHead = botEl ? botEl.querySelector('.bot-head') : null;
+  const botBodyWrapper = botEl ? botEl.querySelector('.bot-body-wrapper') : null;
+
+  if (botEl && botHead && botBodyWrapper) {
+    let lastScrollY = window.scrollY;
+    let scrollTimeout = null;
+    let isSpinning = false;
+
+    // 1. Scroll-linked tilting & wavy translation
+    window.addEventListener('scroll', () => {
+      const currentScrollY = window.scrollY;
+      const scrollDiff = currentScrollY - lastScrollY;
+      lastScrollY = currentScrollY;
+
+      // Calculate vertical scroll velocity limit to 30px max
+      const velocity = Math.max(-30, Math.min(30, scrollDiff));
+      
+      // Tilt forward or backward depending on scroll direction
+      const tiltAngle = velocity * 0.8; // tilts up to 24deg
+      
+      // Calculate horizontal wavy offset based on scroll progress
+      const documentHeight = document.documentElement.scrollHeight - window.innerHeight;
+      const scrollPercent = documentHeight > 0 ? currentScrollY / documentHeight : 0;
+      const wavyOffset = Math.sin(scrollPercent * Math.PI * 6) * 35; // wobbles up to 35px left and right
+
+      if (!isSpinning) {
+        // Apply tilt and translation
+        botBodyWrapper.style.transform = `translateY(0) rotateY(${wavyOffset * 0.3}deg) rotateX(${tiltAngle}deg) translateX(${wavyOffset}px)`;
+        
+        // Tilt the booster flame during speed increase
+        const boosterFlame = botEl.querySelector('.bot-booster');
+        if (boosterFlame) {
+          boosterFlame.style.transform = `skewX(${velocity * 0.4}deg)`;
+        }
+      }
+
+      // Smoothly return back to idle state once scrolling halts
+      clearTimeout(scrollTimeout);
+      scrollTimeout = setTimeout(() => {
+        if (!isSpinning) {
+          botBodyWrapper.style.transform = 'translateY(0) rotateY(0deg) rotateX(0deg) translateX(0px)';
+          const boosterFlame = botEl.querySelector('.bot-booster');
+          if (boosterFlame) {
+            boosterFlame.style.transform = 'skewX(0deg)';
+          }
+        }
+      }, 250);
+    });
+
+    // 2. Mouse move look-at target tracking
+    window.addEventListener('mousemove', (e) => {
+      if (isSpinning) return;
+      
+      const botRect = botEl.getBoundingClientRect();
+      const botCenterX = botRect.left + botRect.width / 2;
+      const botCenterY = botRect.top + botRect.height / 2;
+
+      // Vector pointing from bot to cursor
+      const deltaX = e.clientX - botCenterX;
+      const deltaY = e.clientY - botCenterY;
+      const distance = Math.sqrt(deltaX * deltaX + deltaY * deltaY);
+
+      // Look at cursor only if cursor is within 500px range
+      if (distance < 500) {
+        const angleX = Math.max(-25, Math.min(25, deltaX / 15));
+        const angleY = Math.max(-20, Math.min(20, -deltaY / 15));
+        
+        // Turn the head to track cursor
+        botHead.style.transform = `translateZ(5px) rotateY(${angleX}deg) rotateX(${angleY}deg)`;
+      } else {
+        botHead.style.transform = 'translateZ(5px) rotateY(0deg) rotateX(0deg)';
+      }
+    });
+
+    // 3. Satisfying Click Interaction (Rapid blinks and 3D spin)
+    botEl.addEventListener('click', () => {
+      if (isSpinning) return;
+      isSpinning = true;
+
+      // Add spin and glow animations
+      botBodyWrapper.style.transition = 'transform 1s cubic-bezier(0.2, 0.8, 0.2, 1.2)';
+      botBodyWrapper.style.transform = 'translateY(-20px) rotateY(720deg) rotateX(20deg)';
+
+      const eyes = botEl.querySelectorAll('.bot-eye');
+      eyes.forEach(eye => {
+        eye.style.background = '#00ff66';
+        eye.style.boxShadow = '0 0 12px #00ff66';
+      });
+
+      // Reset bot back to idle state after animation completes
+      setTimeout(() => {
+        botBodyWrapper.style.transition = '';
+        botBodyWrapper.style.transform = 'translateY(0) rotateY(0deg) rotateX(0deg)';
+        
+        eyes.forEach(eye => {
+          eye.style.background = 'var(--color-purple)';
+          eye.style.boxShadow = '0 0 8px var(--color-purple)';
+        });
+        
+        isSpinning = false;
+      }, 1100);
+    });
+  }
+
   // Initialize background WebGL shader
   initShaderBackground();
 
