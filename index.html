@@ -53,15 +53,14 @@
 
   <!-- Main Content -->
   <main>
-    <!-- Hero Section -->
     <section class="hero-section" id="hero">
-      <div class="container">
+      <div class="hero-grid-bg"><div class="grid-plane"></div></div>
+      <div class="container" style="position: relative; z-index: 1;">
         <div class="hero-grid">
           <!-- Hero Text -->
           <div class="hero-text">
-            <span class="badge badge-purple">Conversational Bookkeeping</span>
-             <h1 class="main-heading"> <span class="text-gemini-gradient"> NewZen BookK</span></h1>
-            <h1 class="main-heading">Accounting,<br>Done by <span class="text-gemini-gradient">AI.</span></h1>
+            <span class="badge badge-cyan">Conversational Bookkeeping</span>
+            <h1 class="main-heading">NewZen Book<span class="logo-accent">K</span><br>Accounting, Done by <span class="text-gemini-gradient">AI.</span></h1>
             <p class="description">
               Real-time double-entry, billing, and GST compliance. Speak naturally, let NewZenBookK AI do the rest.
             </p>
@@ -71,22 +70,27 @@
             </div>
           </div>
           
-          <!-- Hero Interactive Simulator -->
+          <!-- Hero Interactive Digits Console -->
           <div class="hero-visual">
-            <div class="simulator-container">
+            <div class="simulator-container digits-console">
               <div class="sim-header">
                 <div class="sim-controls">
                   <span class="sim-dot red"></span>
                   <span class="sim-dot yellow"></span>
                   <span class="sim-dot green"></span>
                 </div>
-                <div class="sim-title">NewZen BookK AI Console</div>
+                <div class="sim-title">NewZen BookK AI Sandbox</div>
+                <div class="live-indicator"><span class="pulse-dot"></span> Live Sync</div>
               </div>
               <div class="sim-body">
-                <div class="sim-greeting">Hello, <span class="username" style="color: var(--color-purple); font-weight: 600;">Nitin Tirkey</span></div>
-                <div class="sim-user" style="font-size: 13px; color: var(--text-muted); margin-bottom: 16px;">How can I help your business today?</div>
-                
-                <!-- Terminal Input & Output -->
+                <!-- Preset Transaction Selectors -->
+                <div class="sim-selectors">
+                  <button class="sim-btn active" data-prompt="Sold 5 laptops to Ram Debtor with GST 18%" data-type="sale">Cash Sale</button>
+                  <button class="sim-btn" data-prompt="Paid office rent ₹12,000 via HDFC bank" data-type="rent">Rent Payment</button>
+                  <button class="sim-btn" data-prompt="Received ₹50,000 client fee from Warish Ansari" data-type="fee">Client Fee</button>
+                </div>
+
+                <!-- Chat Input Line -->
                 <div class="sim-terminal">
                   <div class="terminal-input-wrapper">
                     <span class="terminal-prompt">AI Chat:</span>
@@ -94,26 +98,55 @@
                     <span class="cursor" id="sim-cursor">|</span>
                   </div>
                   <div class="terminal-line" id="sim-results">
-                    <!-- Updated by JS typing simulator -->
+                    <!-- Typing feedback will go here -->
                   </div>
                 </div>
-                
-                <!-- Preset Transaction Selectors -->
-                <div class="sim-selectors">
-                  <button class="sim-btn active" data-prompt="Sold 5 laptops to Ram Debtor with GST 18%">Cash Sale</button>
-                  <button class="sim-btn" data-prompt="Paid office rent ₹12,000 via HDFC bank">Rent Payment</button>
-                  <button class="sim-btn" data-prompt="Received ₹50,000 client fee from Warish Ansari">Client Receipt</button>
+
+                <!-- Digits Live Financial Chart -->
+                <div class="digits-chart-container">
+                  <svg class="digits-svg-chart" viewBox="0 0 500 100" preserveAspectRatio="none">
+                    <defs>
+                      <linearGradient id="chart-grad" x1="0" y1="0" x2="0" y2="1">
+                        <stop offset="0%" stop-color="#0066ff" stop-opacity="0.35"/>
+                        <stop offset="100%" stop-color="#0066ff" stop-opacity="0"/>
+                      </linearGradient>
+                    </defs>
+                    <path id="chart-area" d="M0,100 L0,50 L100,60 L200,45 L300,70 L400,30 L500,40 L500,100 Z" fill="url(#chart-grad)"></path>
+                    <path id="chart-line" d="M0,50 L100,60 L200,45 L300,70 L400,30 L500,40" fill="none" stroke="#0066ff" stroke-width="2.5"></path>
+                    <circle id="chart-marker" cx="500" cy="40" r="5" fill="#0066ff" class="chart-pulse-node"></circle>
+                  </svg>
                 </div>
-                
-                <!-- Live Preview Ledger Cards -->
-                <div class="sim-preview-ledger">
-                  <div class="mini-card" id="sim-card-left">
-                    <span class="mini-title" id="sim-left-title">Cash A/c</span>
-                    <span class="mini-val" id="sim-left-val">₹0.00</span>
+
+                <!-- Double Entry Ledger Flow Cards -->
+                <div class="ledger-flow-grid">
+                  <div class="ledger-node source-node" id="ledger-source-card">
+                    <span class="node-tag" id="source-tag">Invoice</span>
+                    <h4 id="source-title">Ram Debtor</h4>
+                    <p class="val-positive" id="source-val">₹1,18,000</p>
+                    <div class="node-details" id="source-details">GST 18% Included</div>
                   </div>
-                  <div class="mini-card" id="sim-card-right">
-                    <span class="mini-title" id="sim-right-title">Sales A/c</span>
-                    <span class="mini-val" id="sim-right-val">₹0.00</span>
+
+                  <div class="connector-wires">
+                    <svg class="wires-svg" viewBox="0 0 100 80" preserveAspectRatio="none">
+                      <!-- Left wire path going from center-left to target nodes -->
+                      <path class="wire-path" id="wire-debit-path" d="M0,40 Q50,15 100,20" fill="none" stroke="rgba(0,102,255,0.2)" stroke-width="2"></path>
+                      <path class="wire-path" id="wire-credit-path" d="M0,40 Q50,65 100,60" fill="none" stroke="rgba(0,102,255,0.2)" stroke-width="2"></path>
+                      <circle r="3" fill="#00ff66" class="flow-particle p1" id="particle-debit"></circle>
+                      <circle r="3" fill="#00d2ff" class="flow-particle p2" id="particle-credit"></circle>
+                    </svg>
+                  </div>
+
+                  <div class="ledger-targets">
+                    <div class="ledger-node target-node" id="ledger-debit-card">
+                      <span class="node-tag debit" id="debit-tag">Debit (Cash)</span>
+                      <h4 id="debit-title">Cash & Bank A/c</h4>
+                      <p class="val-neutral" id="debit-val">+₹1,00,000</p>
+                    </div>
+                    <div class="ledger-node target-node" id="ledger-credit-card">
+                      <span class="node-tag credit" id="credit-tag">Credit (GST)</span>
+                      <h4 id="credit-title">GST Output A/c</h4>
+                      <p class="val-neutral" id="credit-val">+₹18,000</p>
+                    </div>
                   </div>
                 </div>
               </div>

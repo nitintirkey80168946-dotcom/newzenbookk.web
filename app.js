@@ -237,49 +237,97 @@ document.addEventListener('DOMContentLoaded', () => {
   const simInput = document.getElementById('sim-input');
   const simResults = document.getElementById('sim-results');
   const simBtns = document.querySelectorAll('.sim-btn');
-  const leftCard = document.getElementById('sim-card-left');
-  const rightCard = document.getElementById('sim-card-right');
-  const leftTitle = document.getElementById('sim-left-title');
-  const rightTitle = document.getElementById('sim-right-title');
-  const leftVal = document.getElementById('sim-left-val');
-  const rightVal = document.getElementById('sim-right-val');
+  
+  // New Digits Ledger Node Elements
+  const sourceCard = document.getElementById('ledger-source-card');
+  const sourceTag = document.getElementById('source-tag');
+  const sourceTitle = document.getElementById('source-title');
+  const sourceVal = document.getElementById('source-val');
+  const sourceDetails = document.getElementById('source-details');
+  
+  const debitCard = document.getElementById('ledger-debit-card');
+  const debitTag = document.getElementById('debit-tag');
+  const debitTitle = document.getElementById('debit-title');
+  const debitVal = document.getElementById('debit-val');
+  
+  const creditCard = document.getElementById('ledger-credit-card');
+  const creditTag = document.getElementById('credit-tag');
+  const creditTitle = document.getElementById('credit-title');
+  const creditVal = document.getElementById('credit-val');
+  
+  const chartLine = document.getElementById('chart-line');
+  const chartArea = document.getElementById('chart-area');
+  const chartMarker = document.getElementById('chart-marker');
+  
+  const particleDebit = document.getElementById('particle-debit');
+  const particleCredit = document.getElementById('particle-credit');
 
   // Simulated double-entry ledger configurations
   const simulations = {
     "Sold 5 laptops to Ram Debtor with GST 18%": {
-      leftAcc: "Cash A/c",
-      rightAcc: "Sales A/c",
-      leftVal: "₹4,08,357.82",
-      rightVal: "₹5,51,597.00",
+      sourceTag: "Sales Invoice",
+      sourceTitle: "Ram Debtor",
+      sourceVal: "₹1,18,000",
+      sourceDetails: "GST 18% Included",
+      debitTag: "Debit (Cash)",
+      debitTitle: "Cash & Bank A/c",
+      debitVal: "+₹1,00,000",
+      creditTag: "Credit (GST)",
+      creditTitle: "GST Output A/c",
+      creditVal: "+₹18,000",
+      chartLine: "M0,50 L100,60 L200,45 L300,70 L400,30 L500,40",
+      chartArea: "M0,100 L0,50 L100,60 L200,45 L300,70 L400,30 L500,40 L500,100 Z",
+      markerCx: "500",
+      markerCy: "40",
       terminalHtml: `
-        <span class="terminal-system">[NewZen BookK AI]</span> Voucher Class detected: <strong>Sales Invoice / POS</strong><br>
-        <span class="terminal-system">[NewZen BookK AI]</span> debiting <em>Cash A/c</em> with ₹4,08,357.82<br>
-        <span class="terminal-system">[NewZen BookK AI]</span> crediting <em>Sales A/c</em> with ₹5,51,597.00<br>
-        <span class="terminal-results">[Audit] Real-time Mobile POS upload complete.</span>
+        <span class="terminal-system">[NewZen BookK AI]</span> Parsed invoice entities: <strong>POS Sales</strong><br>
+        <span class="terminal-system">[NewZen BookK AI]</span> Debiting Cash A/c with <em>₹1,00,000</em><br>
+        <span class="terminal-system">[NewZen BookK AI]</span> Crediting GST Output A/c with <em>₹18,000</em><br>
+        <span class="terminal-results">[Audit] Double-entry balanced. Real-time graphs updated.</span>
       `
     },
     "Paid office rent ₹12,000 via HDFC bank": {
-      leftAcc: "Rent Expense A/c",
-      rightAcc: "HDFC Bank A/c",
-      leftVal: "₹12,000.00",
-      rightVal: "₹32,358.82",
+      sourceTag: "Expense Pay",
+      sourceTitle: "Office Rent",
+      sourceVal: "₹12,000",
+      sourceDetails: "Payment via HDFC NetBanking",
+      debitTag: "Debit (Expense)",
+      debitTitle: "Rent Expense A/c",
+      debitVal: "+₹12,000",
+      creditTag: "Credit (Asset)",
+      creditTitle: "HDFC Bank A/c",
+      creditVal: "-₹12,000",
+      chartLine: "M0,50 L100,40 L200,55 L300,30 L400,65 L500,75",
+      chartArea: "M0,100 L0,50 L100,40 L200,55 L300,30 L400,65 L500,75 L500,100 Z",
+      markerCx: "500",
+      markerCy: "75",
       terminalHtml: `
-        <span class="terminal-system">[NewZen BookK AI]</span> Voucher Class detected: <strong>Expense Voucher</strong><br>
-        <span class="terminal-system">[NewZen BookK AI]</span> debiting <em>Rent Expense A/c</em> with ₹12,000.00<br>
-        <span class="terminal-system">[NewZen BookK AI]</span> crediting <em>HDFC Bank A/c</em> with ₹32,358.82<br>
-        <span class="terminal-results">[Audit] Ledger posting balanced. Mobile-Sync OK.</span>
+        <span class="terminal-system">[NewZen BookK AI]</span> Parsed transaction: <strong>Expense Voucher</strong><br>
+        <span class="terminal-system">[NewZen BookK AI]</span> Debiting Rent Expense A/c with <em>₹12,000</em><br>
+        <span class="terminal-system">[NewZen BookK AI]</span> Crediting HDFC Bank A/c with <em>-₹12,000</em><br>
+        <span class="terminal-results">[Audit] Cash outflow verified. Books automatically balanced.</span>
       `
     },
     "Received ₹50,000 client fee from Warish Ansari": {
-      leftAcc: "HDFC Bank A/c",
-      rightAcc: "Warish Ansari A/c",
-      leftVal: "₹82,358.82",
-      rightVal: "₹1,00,000.00",
+      sourceTag: "Client Receipt",
+      sourceTitle: "Warish Ansari",
+      sourceVal: "₹50,000",
+      sourceDetails: "Direct Bank Transfer",
+      debitTag: "Debit (Asset)",
+      debitTitle: "Cash & Bank A/c",
+      debitVal: "+₹50,000",
+      creditTag: "Credit (Revenue)",
+      creditTitle: "Professional Fee A/c",
+      creditVal: "+₹50,000",
+      chartLine: "M0,50 L100,55 L200,40 L300,65 L400,20 L500,15",
+      chartArea: "M0,100 L0,50 L100,55 L200,40 L300,65 L400,20 L500,15 L500,100 Z",
+      markerCx: "500",
+      markerCy: "15",
       terminalHtml: `
-        <span class="terminal-system">[NewZen BookK AI]</span> Voucher Class detected: <strong>Receipt Voucher</strong><br>
-        <span class="terminal-system">[NewZen BookK AI]</span> debiting <em>HDFC Bank A/c</em> with ₹82,358.82<br>
-        <span class="terminal-system">[NewZen BookK AI]</span> crediting <em>Warish Ansari A/c</em> with ₹1,00,000.00<br>
-        <span class="terminal-results">[Audit] Voucher balanced cryptographically.</span>
+        <span class="terminal-system">[NewZen BookK AI]</span> Parsed receipt: <strong>Revenue Voucher</strong><br>
+        <span class="terminal-system">[NewZen BookK AI]</span> Debiting Cash & Bank A/c with <em>₹50,000</em><br>
+        <span class="terminal-system">[NewZen BookK AI]</span> Crediting Professional Fee A/c with <em>₹50,000</em><br>
+        <span class="terminal-results">[Audit] Revenue ledger synced to GST cloud.</span>
       `
     }
   };
@@ -311,22 +359,54 @@ document.addEventListener('DOMContentLoaded', () => {
           const data = simulations[prompt];
           simResults.innerHTML = data.terminalHtml;
           
-          // Update ledger cards
-          if (leftTitle && rightTitle && leftVal && rightVal) {
-            leftTitle.textContent = data.leftAcc;
-            rightTitle.textContent = data.rightAcc;
-            
-            // Value counter effect (simplified)
-            leftVal.textContent = data.leftVal;
-            rightVal.textContent = data.rightVal;
-            
-            // Flash cards visual indicator
-            leftCard.style.borderColor = 'var(--border-active)';
-            rightCard.style.borderColor = 'var(--border-active)';
+          // Update Digits Ledger node contents
+          if (sourceTag && sourceTitle && sourceVal && sourceDetails) {
+            sourceTag.textContent = data.sourceTag;
+            sourceTitle.textContent = data.sourceTitle;
+            sourceVal.textContent = data.sourceVal;
+            sourceDetails.textContent = data.sourceDetails;
+          }
+          
+          if (debitTag && debitTitle && debitVal) {
+            debitTag.textContent = data.debitTag;
+            debitTitle.textContent = data.debitTitle;
+            debitVal.textContent = data.debitVal;
+          }
+          
+          if (creditTag && creditTitle && creditVal) {
+            creditTag.textContent = data.creditTag;
+            creditTitle.textContent = data.creditTitle;
+            creditVal.textContent = data.creditVal;
+          }
+
+          // Update SVG Chart
+          if (chartLine && chartArea && chartMarker) {
+            chartLine.setAttribute('d', data.chartLine);
+            chartArea.setAttribute('d', data.chartArea);
+            chartMarker.setAttribute('cx', data.markerCx);
+            chartMarker.setAttribute('cy', data.markerCy);
+          }
+
+          // Trigger particle animations flow
+          if (particleDebit && particleCredit) {
+            particleDebit.style.animation = 'none';
+            particleCredit.style.animation = 'none';
+            particleDebit.offsetHeight; // trigger reflow
+            particleCredit.offsetHeight; // trigger reflow
+            particleDebit.style.animation = 'move-particle 2s linear forwards';
+            particleCredit.style.animation = 'move-particle 2.2s linear forwards 0.2s';
+          }
+          
+          // Flash cards visual indicator
+          if (sourceCard && debitCard && creditCard) {
+            sourceCard.style.borderColor = 'var(--border-active)';
+            debitCard.style.borderColor = 'var(--border-active)';
+            creditCard.style.borderColor = 'var(--border-active)';
             
             setTimeout(() => {
-              leftCard.style.borderColor = 'var(--border-glow)';
-              rightCard.style.borderColor = 'var(--border-glow)';
+              sourceCard.style.borderColor = 'var(--border-glow)';
+              debitCard.style.borderColor = 'var(--border-glow)';
+              creditCard.style.borderColor = 'var(--border-glow)';
             }, 800);
           }
         }, 300);
@@ -385,7 +465,7 @@ document.addEventListener('DOMContentLoaded', () => {
       const float minorLineFrequency = 1.0;
       const vec4 gridColor = vec4(0.5);
       const float scale = 5.0;
-      const vec4 lineColor = vec4(0.4, 0.2, 0.8, 1.0);
+      const vec4 lineColor = vec4(0.0, 0.4, 1.0, 1.0);
       const float minLineWidth = 0.01;
       const float maxLineWidth = 0.2;
       const float lineSpeed = 1.0 * overallSpeed;
@@ -436,8 +516,8 @@ document.addEventListener('DOMContentLoaded', () => {
         space.x += random(space.y * warpFrequency + iTime * warpSpeed + 2.0) * warpAmplitude * horizontalFade;
 
         vec4 lines = vec4(0.0);
-        vec4 bgColor1 = vec4(0.04, 0.04, 0.08, 1.0);
-        vec4 bgColor2 = vec4(0.08, 0.04, 0.12, 1.0);
+        vec4 bgColor1 = vec4(0.01, 0.03, 0.07, 1.0);
+        vec4 bgColor2 = vec4(0.04, 0.08, 0.16, 1.0);
 
         for(int l = 0; l < 16; l++) {
           float normalizedLineIndex = float(l) / 16.0;
@@ -520,7 +600,7 @@ document.addEventListener('DOMContentLoaded', () => {
     function render() {
       const elapsedSeconds = (Date.now() - startTime) / 1000;
 
-      gl.clearColor(0.04, 0.04, 0.08, 1.0);
+      gl.clearColor(0.01, 0.03, 0.07, 1.0);
       gl.clear(gl.COLOR_BUFFER_BIT);
 
       gl.useProgram(program);

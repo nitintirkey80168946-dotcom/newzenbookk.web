@@ -4,25 +4,25 @@
 
 :root {
   /* Core Color Tokens - Dark Mode Default */
-  --bg-color: #0a0b14;
-  --bg-card: rgba(20, 21, 33, 0.45);
-  --bg-card-hover: rgba(30, 32, 48, 0.6);
-  --bg-card-inner: rgba(16, 17, 26, 0.25);
-  --border-glow: rgba(255, 255, 255, 0.08);
-  --border-active: rgba(155, 81, 224, 0.4);
+  --bg-color: #030712;
+  --bg-card: rgba(10, 15, 30, 0.45);
+  --bg-card-hover: rgba(15, 25, 50, 0.6);
+  --bg-card-inner: rgba(5, 8, 18, 0.4);
+  --border-glow: rgba(0, 102, 255, 0.12);
+  --border-active: rgba(0, 102, 255, 0.5);
   
-  --color-blue: #4285f4;
-  --color-green: #00ff66;
-  --color-purple: #9b51e0;
+  --color-blue: #0066ff;
+  --color-green: #10b981;
+  --color-purple: #00d2ff;
   
   --text-primary: #ffffff;
   --text-muted: rgba(255, 255, 255, 0.7);
   --text-dark: rgba(255, 255, 255, 0.4);
   
-  --gemini-gradient: linear-gradient(75deg, #4285f4 10%, #9b51e0 40%, #ea4335 70%, #e8710a 90%);
-  --hero-bg: radial-gradient(circle at center, #0f101d 0%, #0a0b14 100%);
-  --bg-nav: rgba(10, 11, 20, 0.7);
-  --bg-terminal: rgba(5, 6, 10, 0.85);
+  --gemini-gradient: linear-gradient(75deg, #0066ff 10%, #00d2ff 45%, #3b82f6 75%, #0066ff 95%);
+  --hero-bg: radial-gradient(circle at center, #0b1528 0%, #030712 100%);
+  --bg-nav: rgba(3, 7, 18, 0.75);
+  --bg-terminal: rgba(3, 7, 18, 0.9);
   --canvas-opacity: 1.0;
   
   /* Typography */
@@ -30,33 +30,34 @@
   --font-body: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
   --font-mono: 'JetBrains Mono', monospace;
   
-  --shadow-premium: 0 20px 50px rgba(0, 0, 0, 0.4);
-  --shadow-purple: 0 0 20px rgba(155, 81, 224, 0.2);
+  --shadow-premium: 0 20px 50px rgba(0, 0, 0, 0.5);
+  --shadow-purple: 0 0 20px rgba(0, 102, 255, 0.25);
 }
 
 :root.light-mode {
   /* Core Color Tokens - Light Mode Override */
-  --bg-color: #f0f4f9;
-  --bg-card: rgba(255, 255, 255, 0.55);
-  --bg-card-hover: rgba(255, 255, 255, 0.75);
-  --bg-card-inner: rgba(230, 235, 245, 0.45);
-  --border-glow: rgba(10, 11, 20, 0.08);
-  --border-active: rgba(155, 81, 224, 0.5);
+  --bg-color: #f8fafc;
+  --bg-card: rgba(255, 255, 255, 0.7);
+  --bg-card-hover: rgba(255, 255, 255, 0.9);
+  --bg-card-inner: rgba(241, 245, 249, 0.8);
+  --border-glow: rgba(0, 102, 255, 0.08);
+  --border-active: rgba(0, 102, 255, 0.4);
   
-  --color-blue: #1a73e8;
-  --color-green: #137333;
+  --color-blue: #0066ff;
+  --color-green: #059669;
+  --color-purple: #0ea5e9;
   
   --text-primary: #0a0b14;
   --text-muted: rgba(10, 11, 20, 0.7);
   --text-dark: rgba(10, 11, 20, 0.4);
   
-  --hero-bg: radial-gradient(circle at center, #ffffff 0%, #f0f4f9 100%);
-  --bg-nav: rgba(240, 244, 249, 0.75);
+  --hero-bg: radial-gradient(circle at center, #f1f5f9 0%, #f8fafc 100%);
+  --bg-nav: rgba(248, 250, 252, 0.8);
   --bg-terminal: rgba(255, 255, 255, 0.95);
   --canvas-opacity: 0.15;
   
-  --shadow-premium: 0 20px 50px rgba(10, 11, 20, 0.08);
-  --shadow-purple: 0 0 20px rgba(155, 81, 224, 0.1);
+  --shadow-premium: 0 20px 40px rgba(0, 102, 255, 0.05);
+  --shadow-purple: 0 0 15px rgba(0, 102, 255, 0.1);
 }
 
 /* ==========================================================================
@@ -266,15 +267,15 @@ body {
 }
 
 .btn-primary {
-  background: var(--color-purple);
+  background: var(--color-blue);
   color: #ffffff;
-  box-shadow: 0 4px 15px rgba(155, 81, 224, 0.3);
+  box-shadow: 0 4px 15px rgba(0, 102, 255, 0.3);
 }
 
 .btn-primary:hover {
-  background: #a967e8;
+  background: #1d4ed8;
   transform: translateY(-2px);
-  box-shadow: 0 6px 20px rgba(155, 81, 224, 0.4);
+  box-shadow: 0 6px 20px rgba(0, 102, 255, 0.4);
 }
 
 .btn-secondary {
@@ -292,13 +293,13 @@ body {
 .btn-glowing {
   background: linear-gradient(135deg, var(--color-purple) 0%, var(--color-blue) 100%);
   color: #ffffff;
-  box-shadow: 0 4px 20px rgba(155, 81, 224, 0.25);
+  box-shadow: 0 4px 20px rgba(0, 102, 255, 0.25);
   border: none;
 }
 
 .btn-glowing:hover {
   transform: translateY(-2px);
-  box-shadow: 0 8px 25px rgba(155, 81, 224, 0.4);
+  box-shadow: 0 8px 25px rgba(0, 102, 255, 0.4);
 }
 
 .text-gemini-gradient {
@@ -316,6 +317,44 @@ body {
   background: var(--hero-bg);
   position: relative;
   overflow: hidden;
+}
+
+/* 3D Scrolling Grid Plane Background */
+.hero-grid-bg {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 0;
+  overflow: hidden;
+  pointer-events: none;
+  perspective: 1000px;
+}
+
+.grid-plane {
+  position: absolute;
+  top: -60%;
+  left: -50%;
+  width: 200%;
+  height: 200%;
+  background-image: 
+    linear-gradient(var(--border-glow) 1px, transparent 1px),
+    linear-gradient(90deg, var(--border-glow) 1px, transparent 1px);
+  background-size: 60px 60px;
+  transform: rotateX(60deg) translateY(0);
+  transform-origin: center center;
+  animation: grid-scroll 24s linear infinite;
+  opacity: 0.85;
+}
+
+@keyframes grid-scroll {
+  0% {
+    transform: rotateX(60deg) translateY(0);
+  }
+  100% {
+    transform: rotateX(60deg) translateY(60px);
+  }
 }
 
 .container {
@@ -350,14 +389,14 @@ body {
 }
 
 .badge-purple {
-  background: rgba(155, 81, 224, 0.12);
-  border: 1px solid rgba(155, 81, 224, 0.25);
-  color: var(--color-purple);
+  background: rgba(0, 210, 255, 0.12);
+  border: 1px solid rgba(0, 210, 255, 0.25);
+  color: #00d2ff;
 }
 
 .badge-cyan {
-  background: rgba(66, 133, 244, 0.12);
-  border: 1px solid rgba(66, 133, 244, 0.25);
+  background: rgba(0, 102, 255, 0.12);
+  border: 1px solid rgba(0, 102, 255, 0.25);
   color: var(--color-blue);
 }
 
@@ -542,41 +581,196 @@ body {
 }
 
 .sim-btn.active {
-  background: rgba(155, 81, 224, 0.15);
-  border-color: var(--color-purple);
+  background: rgba(0, 102, 255, 0.15);
+  border-color: var(--color-blue);
   color: var(--color-purple);
-  box-shadow: 0 0 10px rgba(155, 81, 224, 0.1);
+  box-shadow: 0 0 10px rgba(0, 102, 255, 0.2);
 }
 
-.sim-preview-ledger {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 12px;
+/* ==========================================================================
+   DIGITS FLOW DASHBOARD MOCKUP
+   ========================================================================== */
+
+.digits-dashboard {
+  background: var(--bg-card) !important;
+  border: 1px solid var(--border-glow) !important;
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4) !important;
 }
 
-.mini-card {
-  background: var(--bg-card-inner);
-  border: 1px solid var(--border-glow);
-  border-radius: 8px;
-  padding: 12px;
+.live-indicator {
   display: flex;
-  flex-direction: column;
+  align-items: center;
+  gap: 6px;
+  font-size: 11px;
+  font-weight: 600;
+  color: var(--color-green);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
 }
 
-.mini-title {
-  font-size: 10px;
+.pulse-dot {
+  width: 6px;
+  height: 6px;
+  background: var(--color-green);
+  border-radius: 50%;
+  box-shadow: 0 0 8px var(--color-green);
+  animation: dot-pulse 1.5s infinite alternate;
+}
+
+@keyframes dot-pulse {
+  0% { transform: scale(0.8); opacity: 0.5; }
+  100% { transform: scale(1.2); opacity: 1; }
+}
+
+.digits-chart-container {
+  width: 100%;
+  height: 100px;
+  position: relative;
+  margin-bottom: 24px;
+  background: rgba(0, 102, 255, 0.02);
+  border-radius: 12px;
+  border: 1px solid rgba(0, 102, 255, 0.05);
+  overflow: hidden;
+}
+
+.digits-svg-chart {
+  width: 100%;
+  height: 100%;
+}
+
+.chart-line {
+  stroke-dasharray: 1000;
+  stroke-dashoffset: 1000;
+  animation: draw-chart 3s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+}
+
+@keyframes draw-chart {
+  to { stroke-dashoffset: 0; }
+}
+
+.chart-pulse-node {
+  animation: node-ping 2s infinite ease-in-out;
+}
+
+@keyframes node-ping {
+  0%, 100% { r: 4px; opacity: 0.8; }
+  50% { r: 6px; opacity: 1; filter: drop-shadow(0 0 6px #0066ff); }
+}
+
+/* Ledger Flow Layout */
+.ledger-flow-grid {
+  display: grid;
+  grid-template-columns: 1.2fr 0.8fr 1.2fr;
+  gap: 16px;
+  align-items: center;
+}
+
+.ledger-node {
+  background: rgba(3, 7, 18, 0.5);
+  border: 1px solid var(--border-glow);
+  border-radius: 14px;
+  padding: 16px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
+  transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+  position: relative;
+}
+
+.ledger-node:hover {
+  border-color: var(--border-active);
+  transform: translateY(-2px);
+}
+
+.node-tag {
+  font-size: 9px;
+  font-family: var(--font-mono);
+  font-weight: 700;
   text-transform: uppercase;
-  color: var(--text-dark);
+  letter-spacing: 0.05em;
+  padding: 2px 6px;
+  border-radius: 6px;
+  background: rgba(0, 102, 255, 0.15);
+  color: var(--color-blue);
+  display: inline-block;
+  margin-bottom: 8px;
+}
+
+.node-tag.debit {
+  background: rgba(16, 185, 129, 0.15);
+  color: var(--color-green);
+}
+
+.node-tag.credit {
+  background: rgba(0, 210, 255, 0.15);
+  color: #00d2ff;
+}
+
+.ledger-node h4 {
+  font-size: 13px;
   font-family: var(--font-display);
+  margin-bottom: 4px;
+  color: var(--text-primary);
+}
+
+.ledger-node p {
+  font-size: 18px;
   font-weight: 700;
   margin-bottom: 4px;
+  font-family: var(--font-mono);
 }
 
-.mini-val {
-  font-size: 14px;
-  font-weight: 700;
-  font-family: var(--font-mono);
-  color: var(--color-green);
+.val-positive { color: var(--color-blue); }
+.val-neutral { color: var(--text-primary); }
+
+.node-details {
+  font-size: 10px;
+  color: var(--text-dark);
+}
+
+/* Wires & Particle Animations */
+.connector-wires {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.wires-svg {
+  width: 100%;
+  height: 80px;
+  overflow: visible;
+}
+
+.wire-path {
+  stroke-dasharray: 8;
+  animation: dash-flow 15s linear infinite;
+}
+
+@keyframes dash-flow {
+  to { stroke-dashoffset: -200; }
+}
+
+.flow-particle {
+  offset-path: path("M0,40 Q50,15 100,20");
+  animation: move-particle 2s linear infinite;
+}
+
+.flow-particle.p2 {
+  offset-path: path("M0,40 Q50,65 100,60");
+  animation: move-particle 2.2s linear infinite 0.2s;
+}
+
+@keyframes move-particle {
+  0% { offset-distance: 0%; opacity: 0; }
+  10% { opacity: 1; }
+  90% { opacity: 1; }
+  100% { offset-distance: 100%; opacity: 0; }
+}
+
+.ledger-targets {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
 }
 
 /* ==========================================================================
@@ -686,7 +880,7 @@ body {
   justify-content: center;
   background: var(--color-purple);
   border: 1px solid rgba(255, 255, 255, 0.2);
-  box-shadow: 0 0 15px rgba(155, 81, 224, 0.3);
+  box-shadow: 0 0 15px rgba(0, 102, 255, 0.3);
   font-size: 20px;
   margin-bottom: 24px;
   transition: transform 0.4s ease;
@@ -1226,9 +1420,25 @@ body {
 
 .usecase-img-wrapper {
   width: 100%;
-  height: 200px;
+  height: 224px;
   overflow: hidden;
   position: relative;
+  border-bottom: 1px solid var(--border-glow);
+  padding-top: 24px;
+  background: rgba(3, 7, 18, 0.45);
+}
+
+.usecase-img-wrapper::before {
+  content: '';
+  position: absolute;
+  top: 9px;
+  left: 14px;
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: #ff5f56;
+  box-shadow: 10px 0 0 #ffbd2e, 20px 0 0 #27c93f;
+  z-index: 2;
 }
 
 .usecase-img {
@@ -1314,7 +1524,7 @@ body {
   height: 32px;
   background: linear-gradient(135deg, #ffffff 0%, #e0e0e0 100%);
   border-radius: 20px 20px 15px 15px;
-  box-shadow: 0 4px 15px rgba(0,0,0,0.25), inset 0 -3px 6px rgba(0,0,0,0.1), 0 0 10px rgba(155, 81, 224, 0.2);
+  box-shadow: 0 4px 15px rgba(0,0,0,0.25), inset 0 -3px 6px rgba(0,0,0,0.1), 0 0 10px rgba(0, 102, 255, 0.2);
   z-index: 5;
   transform: translateZ(5px);
   transition: transform 0.25s cubic-bezier(0.2, 0.8, 0.2, 1);
@@ -1389,10 +1599,10 @@ body {
   left: 11px;
   width: 14px;
   height: 14px;
-  background: rgba(155, 81, 224, 0.1);
+  background: rgba(0, 102, 255, 0.1);
   border: 2px solid var(--color-purple);
   border-radius: 50%;
-  box-shadow: 0 0 10px rgba(155, 81, 224, 0.5);
+  box-shadow: 0 0 10px rgba(0, 102, 255, 0.5);
   animation: chest-pulse 2s infinite ease-in-out;
 }
 
@@ -1453,10 +1663,10 @@ body {
   left: 2px;
   width: 10px;
   height: 14px;
-  background: linear-gradient(to bottom, #9b51e0, transparent);
+  background: linear-gradient(to bottom, var(--color-blue), transparent);
   border-radius: 50% 50% 0 0;
   animation: flame-pulse 0.2s infinite alternate;
-  box-shadow: 0 4px 10px rgba(155, 81, 224, 0.6);
+  box-shadow: 0 4px 10px rgba(0, 102, 255, 0.6);
 }
 
 @keyframes flame-pulse {
@@ -1651,8 +1861,13 @@ body {
     gap: 6px;
   }
   
-  .sim-preview-ledger {
+  .ledger-flow-grid {
     grid-template-columns: 1fr;
+    gap: 12px;
+  }
+  
+  .connector-wires {
+    display: none;
   }
   
   .main-heading {
