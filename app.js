@@ -625,34 +625,265 @@ document.addEventListener('DOMContentLoaded', () => {
   const botEl = document.getElementById('ai-companion');
   const botHead = botEl ? botEl.querySelector('.bot-head') : null;
   const botBodyWrapper = botEl ? botEl.querySelector('.bot-body-wrapper') : null;
+  const botBubble = document.getElementById('bot-bubble');
 
   if (botEl && botHead && botBodyWrapper) {
     let lastScrollY = window.scrollY;
     let scrollTimeout = null;
     let isSpinning = false;
+    
+    // Draggability and Game state variables
+    let isDragging = false;
+    let isDeactivated = false;
+    let isMischievous = false;
+    let dragOffsetX = 0;
+    let dragOffsetY = 0;
+    let mischiefTimer = null;
+    let returnHomeTimeout = null;
+    let cursorChaseInterval = null;
 
-    // 1. Scroll-linked tilting & wavy translation
+    // Helper to send bot back to its bottom-right home dock
+    function returnHome() {
+      if (isDeactivated) return;
+      botEl.classList.remove('mischievous');
+      isMischievous = false;
+      if (botBubble) botBubble.classList.remove('active');
+      
+      botEl.style.transition = 'all 0.8s cubic-bezier(0.16, 1, 0.3, 1)';
+      botEl.style.left = `${window.innerWidth - 110}px`;
+      botEl.style.top = `${window.innerHeight - 170}px`;
+      
+      clearInterval(cursorChaseInterval);
+      
+      // Re-anchor to bottom/right style after transition completes
+      setTimeout(() => {
+        if (!isDragging && !isMischievous && !isDeactivated) {
+          botEl.style.transition = '';
+          botEl.style.left = '';
+          botEl.style.top = '';
+          botEl.style.bottom = '80px';
+          botEl.style.right = '40px';
+        }
+      }, 800);
+    }
+
+    // Helper to deactivate / block the bot
+    function deactivateBot(message = "System Blocked. Click to reboot.") {
+      isDeactivated = true;
+      isMischievous = false;
+      botEl.classList.remove('mischievous');
+      botEl.classList.add('deactivated');
+      clearInterval(cursorChaseInterval);
+      clearTimeout(returnHomeTimeout);
+
+      if (botBubble) {
+        botBubble.textContent = message;
+        botBubble.classList.add('active');
+      }
+
+      // Drop bot to the bottom center of the viewport
+      botEl.style.transition = 'all 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94)';
+      botEl.style.bottom = 'auto';
+      botEl.style.right = 'auto';
+      botEl.style.left = `${window.innerWidth / 2 - 35}px`;
+      botEl.style.top = `${window.innerHeight - 110}px`;
+      
+      setTimeout(() => {
+        botEl.style.transition = '';
+      }, 600);
+    }
+
+    // Helper to reactivate the bot
+    function rebootBot() {
+      isDeactivated = false;
+      botEl.classList.remove('deactivated');
+      if (botBubble) botBubble.classList.remove('active');
+      
+      // Flash eyes green on reboot
+      const eyes = botEl.querySelectorAll('.bot-eye');
+      eyes.forEach(eye => {
+        eye.style.background = '#00ff66';
+        eye.style.boxShadow = '0 0 12px #00ff66';
+      });
+
+      setTimeout(() => {
+        eyes.forEach(eye => {
+          eye.style.background = '';
+          eye.style.boxShadow = '';
+        });
+        returnHome();
+      }, 500);
+    }
+
+    // Helper to trigger mischievous disturbance
+    function triggerMischief() {
+      if (isDeactivated || isDragging || isMischievous) return;
+      isMischievous = true;
+      botEl.classList.add('mischievous');
+      
+      if (botBubble) {
+        botBubble.textContent = "AI is taking over! 🤖 Click to Block!";
+        botBubble.classList.add('active');
+      }
+
+      // Fly to viewport center
+      const rect = botEl.getBoundingClientRect();
+      botEl.style.bottom = 'auto';
+      botEl.style.right = 'auto';
+      botEl.style.left = `${rect.left}px`;
+      botEl.style.top = `${rect.top}px`;
+      
+      // Delay slightly for transition toggle
+      setTimeout(() => {
+        botEl.style.transition = 'all 1s cubic-bezier(0.16, 1, 0.3, 1)';
+        botEl.style.left = `${window.innerWidth / 2 - 35}px`;
+        botEl.style.top = `${window.innerHeight / 3}px`;
+      }, 20);
+
+      // Chase/Disturb the cursor
+      let mouseX = window.innerWidth / 2;
+      let mouseY = window.innerHeight / 3;
+      
+      const trackMouse = (e) => {
+        mouseX = e.clientX;
+        mouseY = e.clientY;
+      };
+      window.addEventListener('mousemove', trackMouse);
+
+      cursorChaseInterval = setInterval(() => {
+        if (!isMischievous || isDragging || isDeactivated) {
+          window.removeEventListener('mousemove', trackMouse);
+          return;
+        }
+        
+        // Move towards the cursor to block it
+        const currentRect = botEl.getBoundingClientRect();
+        const dx = mouseX - (currentRect.left + 35);
+        const dy = mouseY - (currentRect.top + 45);
+        
+        botEl.style.transition = 'all 0.6s ease-out';
+        botEl.style.left = `${currentRect.left + dx * 0.15}px`;
+        botEl.style.top = `${currentRect.top + dy * 0.15}px`;
+      }, 80);
+
+      // Auto-return home after 12 seconds if not blocked/clicked
+      returnHomeTimeout = setTimeout(() => {
+        window.removeEventListener('mousemove', trackMouse);
+        returnHome();
+      }, 12000);
+    }
+
+    // Start periodic mischief check (every 18 seconds)
+    mischiefTimer = setInterval(() => {
+      // 40% chance of trigger if active
+      if (Math.random() < 0.4) {
+        triggerMischief();
+      }
+    }, 18000);
+
+    // 1. Drag & Drop Handlers (Mouse & Touch)
+    const startDrag = (clientX, clientY) => {
+      if (isDeactivated) {
+        rebootBot();
+        return;
+      }
+      
+      isDragging = true;
+      botEl.classList.add('is-dragging');
+      if (botBubble) botBubble.classList.remove('active');
+      
+      const rect = botEl.getBoundingClientRect();
+      botEl.style.bottom = 'auto';
+      botEl.style.right = 'auto';
+      botEl.style.left = `${rect.left}px`;
+      botEl.style.top = `${rect.top}px`;
+      
+      dragOffsetX = clientX - rect.left;
+      dragOffsetY = clientY - rect.top;
+      
+      botEl.style.transition = 'none';
+      clearInterval(cursorChaseInterval);
+      clearTimeout(returnHomeTimeout);
+    };
+
+    const doDrag = (clientX, clientY) => {
+      if (!isDragging) return;
+      
+      // Constrain coordinates within viewport
+      const x = Math.max(0, Math.min(window.innerWidth - 70, clientX - dragOffsetX));
+      const y = Math.max(0, Math.min(window.innerHeight - 90, clientY - dragOffsetY));
+      
+      botEl.style.left = `${x}px`;
+      botEl.style.top = `${y}px`;
+    };
+
+    const stopDrag = () => {
+      if (!isDragging) return;
+      isDragging = false;
+      botEl.classList.remove('is-dragging');
+      botEl.style.transition = '';
+      
+      if (isMischievous) {
+        // If dragged while disturbing, deactivate it!
+        deactivateBot("Mischief Deactivated! Click to reboot.");
+      } else {
+        // Let it settle at the drag drop location or float back home after 3s
+        setTimeout(() => {
+          if (!isDragging && !isMischievous && !isDeactivated) {
+            returnHome();
+          }
+        }, 3000);
+      }
+    };
+
+    // Mouse Listeners
+    botEl.addEventListener('mousedown', (e) => {
+      if (e.button !== 0) return; // Left click only
+      startDrag(e.clientX, e.clientY);
+      e.preventDefault();
+    });
+
+    window.addEventListener('mousemove', (e) => {
+      doDrag(e.clientX, e.clientY);
+    });
+
+    window.addEventListener('mouseup', () => {
+      stopDrag();
+    });
+
+    // Touch Listeners
+    botEl.addEventListener('touchstart', (e) => {
+      const touch = e.touches[0];
+      startDrag(touch.clientX, touch.clientY);
+    });
+
+    window.addEventListener('touchmove', (e) => {
+      const touch = e.touches[0];
+      doDrag(touch.clientX, touch.clientY);
+    });
+
+    window.addEventListener('touchend', () => {
+      stopDrag();
+    });
+
+    // 2. Scroll-linked tilting & wavy translation
     window.addEventListener('scroll', () => {
+      if (isDragging || isDeactivated || isMischievous) return;
+
       const currentScrollY = window.scrollY;
       const scrollDiff = currentScrollY - lastScrollY;
       lastScrollY = currentScrollY;
 
       // Calculate vertical scroll velocity limit to 30px max
       const velocity = Math.max(-30, Math.min(30, scrollDiff));
-      
-      // Tilt forward or backward depending on scroll direction
       const tiltAngle = velocity * 0.8; // tilts up to 24deg
       
-      // Calculate horizontal wavy offset based on scroll progress
       const documentHeight = document.documentElement.scrollHeight - window.innerHeight;
       const scrollPercent = documentHeight > 0 ? currentScrollY / documentHeight : 0;
       const wavyOffset = Math.sin(scrollPercent * Math.PI * 6) * 35; // wobbles up to 35px left and right
 
       if (!isSpinning) {
-        // Apply tilt and translation
         botBodyWrapper.style.transform = `translateY(0) rotateY(${wavyOffset * 0.3}deg) rotateX(${tiltAngle}deg) translateX(${wavyOffset}px)`;
-        
-        // Tilt the booster flame during speed increase
         const boosterFlame = botEl.querySelector('.bot-booster');
         if (boosterFlame) {
           boosterFlame.style.transform = `skewX(${velocity * 0.4}deg)`;
@@ -662,7 +893,7 @@ document.addEventListener('DOMContentLoaded', () => {
       // Smoothly return back to idle state once scrolling halts
       clearTimeout(scrollTimeout);
       scrollTimeout = setTimeout(() => {
-        if (!isSpinning) {
+        if (!isSpinning && !isDragging && !isDeactivated && !isMischievous) {
           botBodyWrapper.style.transform = 'translateY(0) rotateY(0deg) rotateX(0deg) translateX(0px)';
           const boosterFlame = botEl.querySelector('.bot-booster');
           if (boosterFlame) {
@@ -672,33 +903,44 @@ document.addEventListener('DOMContentLoaded', () => {
       }, 250);
     });
 
-    // 2. Mouse move look-at target tracking
+    // 3. Mouse move look-at target tracking
     window.addEventListener('mousemove', (e) => {
-      if (isSpinning) return;
+      if (isSpinning || isDragging || isDeactivated) return;
       
       const botRect = botEl.getBoundingClientRect();
       const botCenterX = botRect.left + botRect.width / 2;
       const botCenterY = botRect.top + botRect.height / 2;
 
-      // Vector pointing from bot to cursor
       const deltaX = e.clientX - botCenterX;
       const deltaY = e.clientY - botCenterY;
       const distance = Math.sqrt(deltaX * deltaX + deltaY * deltaY);
 
-      // Look at cursor only if cursor is within 500px range
       if (distance < 500) {
         const angleX = Math.max(-25, Math.min(25, deltaX / 15));
         const angleY = Math.max(-20, Math.min(20, -deltaY / 15));
-        
-        // Turn the head to track cursor
         botHead.style.transform = `translateZ(5px) rotateY(${angleX}deg) rotateX(${angleY}deg)`;
       } else {
         botHead.style.transform = 'translateZ(5px) rotateY(0deg) rotateX(0deg)';
       }
     });
 
-    // 3. Satisfying Click Interaction (Rapid blinks and 3D spin)
-    botEl.addEventListener('click', () => {
+    // 4. Click interaction (Block/Deactivate or spin on regular click)
+    botEl.addEventListener('click', (e) => {
+      // If dragged/dragging, ignore click
+      if (isDragging) return;
+
+      if (isDeactivated) {
+        rebootBot();
+        return;
+      }
+
+      if (isMischievous) {
+        // Block/Deactivate if clicked during disturbance
+        deactivateBot("Mischief Deactivated! Click to reboot.");
+        e.stopPropagation();
+        return;
+      }
+
       if (isSpinning) return;
       isSpinning = true;
 
@@ -712,16 +954,16 @@ document.addEventListener('DOMContentLoaded', () => {
         eye.style.boxShadow = '0 0 12px #00ff66';
       });
 
-      // Reset bot back to idle state after animation completes
       setTimeout(() => {
-        botBodyWrapper.style.transition = '';
-        botBodyWrapper.style.transform = 'translateY(0) rotateY(0deg) rotateX(0deg)';
-        
-        eyes.forEach(eye => {
-          eye.style.background = 'var(--color-purple)';
-          eye.style.boxShadow = '0 0 8px var(--color-purple)';
-        });
-        
+        if (!isDeactivated && !isMischievous) {
+          botBodyWrapper.style.transition = '';
+          botBodyWrapper.style.transform = 'translateY(0) rotateY(0deg) rotateX(0deg)';
+          
+          eyes.forEach(eye => {
+            eye.style.background = '';
+            eye.style.boxShadow = '';
+          });
+        }
         isSpinning = false;
       }, 1100);
     });
