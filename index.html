@@ -73,6 +73,23 @@
           
           <!-- Hero Interactive Digits Console -->
           <div class="hero-visual">
+            <!-- 3D Ledger Core Canvas Container -->
+            <div class="hero-3d-canvas-container" id="hero-3d-container">
+              <canvas id="hero-3d-canvas"></canvas>
+              <!-- 3D HUD / Controls Overlay -->
+              <div class="hero-3d-overlay">
+                <div class="hero-3d-badge">
+                  <span class="badge-dot pulse-dot"></span>
+                  <span class="badge-text">Interactive 3D Ledger Core</span>
+                </div>
+                <div class="hero-3d-controls">
+                  <button class="threed-ctrl-btn active" data-mode="solid">Solid Core</button>
+                  <button class="threed-ctrl-btn" data-mode="wireframe">Wireframe</button>
+                  <button class="threed-ctrl-btn" data-mode="particles">Particles</button>
+                </div>
+              </div>
+            </div>
+
             <div class="simulator-container digits-console">
               <div class="sim-header">
                 <div class="sim-controls">
@@ -713,6 +730,8 @@
     </div>
   </div>
 
+  <!-- Three.js Library CDN -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
   <!-- Main JavaScript File -->
   <script src="app.js"></script>
 </body>

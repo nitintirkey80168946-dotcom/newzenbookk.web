@@ -396,6 +396,18 @@ document.addEventListener('DOMContentLoaded', () => {
             particleDebit.style.animation = 'move-particle 2s linear forwards';
             particleCredit.style.animation = 'move-particle 2.2s linear forwards 0.2s';
           }
+
+          // Trigger Three.js 3D laser beams to nodes
+          if (typeof window.trigger3DLaser === 'function') {
+            if (prompt.includes('laptops') || prompt.includes('Sold')) {
+              window.trigger3DLaser('Cash', 0x00ff66); // green laser to Cash node
+              window.trigger3DLaser('GST', 0x00d2ff);  // cyan laser to GST node
+            } else if (prompt.includes('rent') || prompt.includes('Paid')) {
+              window.trigger3DLaser('Expense', 0xff5f56); // red laser to Expense node
+            } else if (prompt.includes('fee') || prompt.includes('Received')) {
+              window.trigger3DLaser('Revenue', 0xffbd2e); // yellow laser to Revenue node
+            }
+          }
           
           // Flash cards visual indicator
           if (sourceCard && debitCard && creditCard) {
@@ -969,7 +981,364 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   }
 
-  // Initialize background WebGL shader
+  /* ==========================================================================
+     THREE.JS 3D INTERACTIVE LEDGER CORE
+     ========================================================================== */
+  function initThreeDHeroVisual() {
+    const container = document.getElementById('hero-3d-container');
+    const canvas = document.getElementById('hero-3d-canvas');
+    if (!container || !canvas) return;
+
+    if (typeof THREE === 'undefined') {
+      console.warn('Three.js is not loaded. Skipping 3D visual.');
+      return;
+    }
+
+    const scene = new THREE.Scene();
+    scene.fog = new THREE.FogExp2(0x030712, 0.015);
+
+    const camera = new THREE.PerspectiveCamera(45, container.clientWidth / container.clientHeight, 0.1, 100);
+    camera.position.z = 15;
+
+    const renderer = new THREE.WebGLRenderer({ canvas: canvas, alpha: true, antialias: true });
+    renderer.setSize(container.clientWidth, container.clientHeight);
+    renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+
+    const ambientLight = new THREE.AmbientLight(0xffffff, 0.35);
+    scene.add(ambientLight);
+
+    const coreLight = new THREE.PointLight(0x0066ff, 3.5, 18);
+    coreLight.position.set(0, 0, 0);
+    scene.add(coreLight);
+
+    const mainGroup = new THREE.Group();
+    scene.add(mainGroup);
+
+    // 1. Central Core Geometry (Geodesic Icosahedron)
+    const coreGeometry = new THREE.IcosahedronGeometry(2.0, 1);
+    const coreMaterial = new THREE.MeshBasicMaterial({
+      color: 0x0066ff,
+      wireframe: false,
+      transparent: true,
+      opacity: 0.75
+    });
+    const coreMesh = new THREE.Mesh(coreGeometry, coreMaterial);
+    mainGroup.add(coreMesh);
+
+    // Inner glowing core sphere
+    const innerGeo = new THREE.SphereGeometry(1.0, 16, 16);
+    const innerMat = new THREE.MeshBasicMaterial({
+      color: 0x00d2ff,
+      transparent: true,
+      opacity: 0.4
+    });
+    const innerMesh = new THREE.Mesh(innerGeo, innerMat);
+    mainGroup.add(innerMesh);
+
+    // 2. Concentric Orbit Rings
+    const orbitGroup = new THREE.Group();
+    mainGroup.add(orbitGroup);
+
+    const ringCount = 3;
+    const ringMaterials = [
+      new THREE.LineBasicMaterial({ color: 0x0066ff, transparent: true, opacity: 0.35 }),
+      new THREE.LineBasicMaterial({ color: 0x00d2ff, transparent: true, opacity: 0.35 }),
+      new THREE.LineBasicMaterial({ color: 0x3b82f6, transparent: true, opacity: 0.35 })
+    ];
+
+    const orbits = [];
+    const orbitRadii = [3.6, 4.8, 6.0];
+    const rotations = [
+      { x: Math.PI / 6, y: Math.PI / 4, z: 0 },
+      { x: -Math.PI / 5, y: -Math.PI / 3, z: Math.PI / 6 },
+      { x: Math.PI / 3, y: -Math.PI / 6, z: -Math.PI / 4 }
+    ];
+
+    for (let i = 0; i < ringCount; i++) {
+      const radius = orbitRadii[i];
+      const segments = 64;
+      const ringGeometry = new THREE.BufferGeometry();
+      const vertices = [];
+      for (let j = 0; j <= segments; j++) {
+        const theta = (j / segments) * Math.PI * 2;
+        vertices.push(Math.cos(theta) * radius, Math.sin(theta) * radius, 0);
+      }
+      ringGeometry.setAttribute('position', new THREE.Float32BufferAttribute(vertices, 3));
+      
+      const lineLoop = new THREE.LineLoop(ringGeometry, ringMaterials[i]);
+      lineLoop.rotation.set(rotations[i].x, rotations[i].y, rotations[i].z);
+      orbitGroup.add(lineLoop);
+      orbits.push(lineLoop);
+    }
+
+    // 3. Floating Ledger Nodes on Orbit Rings
+    const nodeGeometry = new THREE.SphereGeometry(0.3, 16, 16);
+    const nodeColors = [0x00ff66, 0x00d2ff, 0xffbd2e, 0xff5f56];
+    const nodeLabels = ["Cash", "GST Tax", "Revenue", "Expense"];
+    const nodes = [];
+
+    for (let i = 0; i < 4; i++) {
+      const nodeMaterial = new THREE.MeshBasicMaterial({
+        color: nodeColors[i],
+        transparent: true,
+        opacity: 0.95
+      });
+      const nodeMesh = new THREE.Mesh(nodeGeometry, nodeMaterial);
+      
+      const orbitIndex = i % ringCount;
+      nodeMesh.userData = {
+        orbitIndex: orbitIndex,
+        radius: orbitRadii[orbitIndex],
+        angle: (i * Math.PI / 2) + Math.random() * 0.5,
+        speed: 0.006 + (i * 0.002),
+        label: nodeLabels[i],
+        color: nodeColors[i],
+        pulse: 0
+      };
+      
+      orbitGroup.add(nodeMesh);
+      nodes.push(nodeMesh);
+    }
+
+    // Particle Beam System for laser transfers
+    const particleGeometry = new THREE.BufferGeometry();
+    const particleCount = 150;
+    const particlePositions = new Float32Array(particleCount * 3);
+    const particleSpeeds = new Float32Array(particleCount);
+    const particleTargets = [];
+    const particleStates = [];
+
+    for (let i = 0; i < particleCount; i++) {
+      particlePositions[i * 3] = 0;
+      particlePositions[i * 3 + 1] = 0;
+      particlePositions[i * 3 + 2] = 0;
+      particleSpeeds[i] = 0.04 + Math.random() * 0.04;
+      particleTargets.push(null);
+      particleStates.push(0);
+    }
+
+    particleGeometry.setAttribute('position', new THREE.BufferAttribute(particlePositions, 3));
+    const particleMaterial = new THREE.PointsMaterial({
+      color: 0x00ff66,
+      size: 0.15,
+      transparent: true,
+      opacity: 0.8,
+      blending: THREE.AdditiveBlending
+    });
+    const particleSystem = new THREE.Points(particleGeometry, particleMaterial);
+    scene.add(particleSystem);
+
+    window.trigger3DLaser = function(nodeName, colorHex = 0x00ff66) {
+      const targetNode = nodes.find(n => n.userData.label.toLowerCase().includes(nodeName.toLowerCase()));
+      if (!targetNode) return;
+
+      coreMaterial.color.setHex(colorHex);
+      innerMat.color.setHex(colorHex);
+      coreLight.color.setHex(colorHex);
+      coreLight.intensity = 8;
+      
+      targetNode.scale.set(1.8, 1.8, 1.8);
+      targetNode.userData.pulse = 1.0;
+
+      setTimeout(() => {
+        coreMaterial.color.setHex(0x0066ff);
+        innerMat.color.setHex(0x00d2ff);
+        coreLight.color.setHex(0x0066ff);
+        coreLight.intensity = 3.5;
+      }, 1000);
+
+      let activated = 0;
+      const positions = particleSystem.geometry.attributes.position.array;
+      particleMaterial.color.setHex(colorHex);
+
+      for (let i = 0; i < particleCount; i++) {
+        if (particleStates[i] === 0) {
+          particleStates[i] = 1;
+          positions[i * 3] = 0;
+          positions[i * 3 + 1] = 0;
+          positions[i * 3 + 2] = 0;
+          particleTargets[i] = targetNode;
+          particleSpeeds[i] = 0.04 + Math.random() * 0.06;
+          
+          activated++;
+          if (activated >= 30) break;
+        }
+      }
+      particleSystem.geometry.attributes.position.needsUpdate = true;
+    };
+
+    // Mode toggling
+    let renderMode = 'solid';
+    const ctrlButtons = container.querySelectorAll('.threed-ctrl-btn');
+    ctrlButtons.forEach(btn => {
+      btn.addEventListener('click', (e) => {
+        ctrlButtons.forEach(b => b.classList.remove('active'));
+        btn.classList.add('active');
+        renderMode = btn.getAttribute('data-mode');
+
+        if (renderMode === 'wireframe') {
+          coreMaterial.wireframe = true;
+          coreMesh.visible = true;
+          innerMesh.visible = false;
+        } else if (renderMode === 'solid') {
+          coreMaterial.wireframe = false;
+          coreMesh.visible = true;
+          innerMesh.visible = true;
+        } else if (renderMode === 'particles') {
+          coreMesh.visible = false;
+          innerMesh.visible = false;
+        }
+        e.stopPropagation();
+      });
+    });
+
+    let targetX = 0;
+    let targetY = 0;
+    let currentX = 0;
+    let currentY = 0;
+
+    window.addEventListener('mousemove', (e) => {
+      const halfWidth = window.innerWidth / 2;
+      const halfHeight = window.innerHeight / 2;
+      targetX = (e.clientX - halfWidth) / halfWidth * 0.35;
+      targetY = (e.clientY - halfHeight) / halfHeight * 0.25;
+    });
+
+    const clock = new THREE.Clock();
+
+    function animate() {
+      requestAnimationFrame(animate);
+
+      const delta = clock.getDelta();
+
+      if (coreMesh.visible) {
+        coreMesh.rotation.x += 0.004;
+        coreMesh.rotation.y += 0.006;
+      }
+      innerMesh.rotation.y -= 0.003;
+
+      orbits.forEach((orbit, index) => {
+        orbit.rotation.z += 0.001 * (index + 1);
+      });
+
+      const positions = particleSystem.geometry.attributes.position.array;
+      
+      nodes.forEach((node) => {
+        const u = node.userData;
+        u.angle += u.speed;
+        
+        const orbitRing = orbits[u.orbitIndex];
+        const localPos = new THREE.Vector3(
+          Math.cos(u.angle) * u.radius,
+          Math.sin(u.angle) * u.radius,
+          0
+        );
+        
+        localPos.applyEuler(orbitRing.rotation);
+        node.position.copy(localPos);
+
+        if (u.pulse > 0) {
+          u.pulse -= delta * 1.5;
+          const scale = 1.0 + u.pulse * 0.8;
+          node.scale.set(scale, scale, scale);
+        }
+      });
+
+      let particlesNeedUpdate = false;
+      for (let i = 0; i < particleCount; i++) {
+        if (particleStates[i] === 1) {
+          particlesNeedUpdate = true;
+          const targetNode = particleTargets[i];
+          
+          if (targetNode) {
+            const px = positions[i * 3];
+            const py = positions[i * 3 + 1];
+            const pz = positions[i * 3 + 2];
+            
+            const dx = targetNode.position.x - px;
+            const dy = targetNode.position.y - py;
+            const dz = targetNode.position.z - pz;
+            const dist = Math.sqrt(dx * dx + dy * dy + dz * dz);
+            
+            if (dist < 0.25) {
+              particleStates[i] = 0;
+              positions[i * 3] = 0;
+              positions[i * 3 + 1] = 0;
+              positions[i * 3 + 2] = 0;
+            } else {
+              positions[i * 3] += (dx / dist) * particleSpeeds[i];
+              positions[i * 3 + 1] += (dy / dist) * particleSpeeds[i];
+              positions[i * 3 + 2] += (dz / dist) * particleSpeeds[i];
+            }
+          } else {
+            particleStates[i] = 0;
+          }
+        }
+      }
+      if (particlesNeedUpdate) {
+        particleSystem.geometry.attributes.position.needsUpdate = true;
+      }
+
+      currentX += (targetX - currentX) * 0.08;
+      currentY += (targetY - currentY) * 0.08;
+      mainGroup.rotation.y = currentX * 1.0;
+      mainGroup.rotation.x = currentY * 0.7;
+
+      renderer.render(scene, camera);
+    }
+
+    function onWindowResize() {
+      camera.aspect = container.clientWidth / container.clientHeight;
+      camera.updateProjectionMatrix();
+      renderer.setSize(container.clientWidth, container.clientHeight);
+    }
+    window.addEventListener('resize', onWindowResize);
+
+    animate();
+  }
+
+  /* ==========================================================================
+     3D CARD TILT & REFLECTION SHINE ENGINE
+     ========================================================================== */
+  function initCard3DTilt() {
+    const cards = document.querySelectorAll('.bento-card, .price-card, .usecase-card, .blueprint-card, .policy-card');
+    
+    cards.forEach(card => {
+      const shine = document.createElement('div');
+      shine.className = 'card-shine';
+      card.appendChild(shine);
+
+      card.addEventListener('mousemove', (e) => {
+        const rect = card.getBoundingClientRect();
+        const mouseX = e.clientX - rect.left;
+        const mouseY = e.clientY - rect.top;
+
+        const centerX = rect.width / 2;
+        const centerY = rect.height / 2;
+        const percentX = (mouseX - centerX) / centerX;
+        const percentY = (mouseY - centerY) / centerY;
+
+        const maxTilt = 8;
+        const rotateX = -percentY * maxTilt;
+        const rotateY = percentX * maxTilt;
+
+        card.style.transform = `perspective(1000px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) scale3d(1.02, 1.02, 1.02)`;
+
+        card.style.setProperty('--shine-x', `${(mouseX / rect.width) * 100}%`);
+        card.style.setProperty('--shine-y', `${(mouseY / rect.height) * 100}%`);
+      });
+
+      card.addEventListener('mouseleave', () => {
+        card.style.transform = 'perspective(1000px) rotateX(0deg) rotateY(0deg) scale3d(1, 1, 1)';
+        card.style.removeProperty('--shine-x');
+        card.style.removeProperty('--shine-y');
+      });
+    });
+  }
+
+  // Initialize interactive systems
+  initThreeDHeroVisual();
+  initCard3DTilt();
   initShaderBackground();
 
 });
