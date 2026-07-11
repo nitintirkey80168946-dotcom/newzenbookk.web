@@ -13,6 +13,47 @@
 document.addEventListener('DOMContentLoaded', () => {
 
   /* ==========================================================================
+     FLOATING SIX-THEME SWITCHER DOCK
+     ========================================================================== */
+  const themeDockButtons = document.querySelectorAll('.theme-option-btn');
+  const savedTheme = localStorage.getItem('newzen-theme') || 'zen-sand';
+
+  function applyTheme(themeName) {
+    document.body.classList.remove(
+      'theme-zen-sand',
+      'theme-sui-cyber',
+      'theme-olive-sage',
+      'theme-slate-orchid',
+      'theme-terracotta-rust',
+      'theme-midnight-gold'
+    );
+    document.body.classList.add(`theme-${themeName}`);
+    localStorage.setItem('newzen-theme', themeName);
+
+    // Trigger Three.js color update if initialized
+    if (typeof window.updateThreeDThemeColors === 'function') {
+      window.updateThreeDThemeColors();
+    }
+  }
+
+  applyTheme(savedTheme);
+
+  themeDockButtons.forEach(btn => {
+    if (btn.getAttribute('data-theme') === savedTheme) {
+      themeDockButtons.forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+    }
+
+    btn.addEventListener('click', (e) => {
+      const selectedTheme = btn.getAttribute('data-theme');
+      applyTheme(selectedTheme);
+      themeDockButtons.forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+      e.stopPropagation();
+    });
+  });
+
+  /* ==========================================================================
      MOBILE NAVIGATION MENU
      ========================================================================== */
   const menuToggle = document.getElementById('mobile-menu-toggle');
@@ -454,7 +495,36 @@ document.addEventListener('DOMContentLoaded', () => {
       return;
     }
 
-    // Vertex Shader Source
+    // Dynamic color parsing helper
+    function getThemeColorVector(variableName, defaultVal) {
+      const colorStr = getComputedStyle(document.body).getPropertyValue(variableName).trim();
+      if (!colorStr) return defaultVal;
+      
+      if (colorStr.startsWith('#')) {
+        let hex = colorStr.slice(1);
+        if (hex.length === 3) {
+          hex = hex[0] + hex[0] + hex[1] + hex[1] + hex[2] + hex[2];
+        }
+        const r = parseInt(hex.slice(0, 2), 16) / 255;
+        const g = parseInt(hex.slice(2, 4), 16) / 255;
+        const b = parseInt(hex.slice(4, 6), 16) / 255;
+        return [r, g, b, 1.0];
+      }
+      
+      if (colorStr.startsWith('rgb')) {
+        const parts = colorStr.match(/[\d.]+/g);
+        if (parts && parts.length >= 3) {
+          const r = parseFloat(parts[0]) / 255;
+          const g = parseFloat(parts[1]) / 255;
+          const b = parseFloat(parts[2]) / 255;
+          const a = parts.length === 4 ? parseFloat(parts[3]) : 1.0;
+          return [r, g, b, a];
+        }
+      }
+
+      return defaultVal;
+    }
+
     const vsSource = `
       attribute vec4 aVertexPosition;
       void main() {
@@ -462,11 +532,13 @@ document.addEventListener('DOMContentLoaded', () => {
       }
     `;
 
-    // Fragment Shader Source
     const fsSource = `
       precision highp float;
       uniform vec2 iResolution;
       uniform float iTime;
+      uniform vec4 uBgColor1;
+      uniform vec4 uBgColor2;
+      uniform vec4 uLineColor;
 
       const float overallSpeed = 0.2;
       const float gridSmoothWidth = 0.015;
@@ -477,7 +549,6 @@ document.addEventListener('DOMContentLoaded', () => {
       const float minorLineFrequency = 1.0;
       const vec4 gridColor = vec4(0.5);
       const float scale = 5.0;
-      const vec4 lineColor = vec4(0.0, 0.4, 1.0, 1.0);
       const float minLineWidth = 0.01;
       const float maxLineWidth = 0.2;
       const float lineSpeed = 1.0 * overallSpeed;
@@ -490,7 +561,6 @@ document.addEventListener('DOMContentLoaded', () => {
       const float offsetSpeed = 1.33 * overallSpeed;
       const float minOffsetSpread = 0.6;
       const float maxOffsetSpread = 2.0;
-      const int linesPerGroup = 16;
 
       #define drawCircle(pos, radius, coord) smoothstep(radius + gridSmoothWidth, radius, length(coord - (pos)))
       #define drawSmoothLine(pos, halfWidth, t) smoothstep(halfWidth, 0.0, abs(pos - (t)))
@@ -528,8 +598,8 @@ document.addEventListener('DOMContentLoaded', () => {
         space.x += random(space.y * warpFrequency + iTime * warpSpeed + 2.0) * warpAmplitude * horizontalFade;
 
         vec4 lines = vec4(0.0);
-        vec4 bgColor1 = vec4(0.01, 0.03, 0.07, 1.0);
-        vec4 bgColor2 = vec4(0.04, 0.08, 0.16, 1.0);
+        vec4 bgColor1 = uBgColor1;
+        vec4 bgColor2 = uBgColor2;
 
         for(int l = 0; l < 16; l++) {
           float normalizedLineIndex = float(l) / 16.0;
@@ -546,7 +616,7 @@ document.addEventListener('DOMContentLoaded', () => {
           float circle = drawCircle(circlePosition, 0.01, space) * 4.0;
 
           line = line + circle;
-          lines += line * lineColor * rand;
+          lines += line * uLineColor * rand;
         }
 
         fragColor = mix(bgColor1, bgColor2, uv.x);
@@ -597,6 +667,11 @@ document.addEventListener('DOMContentLoaded', () => {
     const positionAttrib = gl.getAttribLocation(program, 'aVertexPosition');
     const resolutionUniform = gl.getUniformLocation(program, 'iResolution');
     const timeUniform = gl.getUniformLocation(program, 'iTime');
+    
+    // Uniforms for theme colors
+    const uBgColor1Uniform = gl.getUniformLocation(program, 'uBgColor1');
+    const uBgColor2Uniform = gl.getUniformLocation(program, 'uBgColor2');
+    const uLineColorUniform = gl.getUniformLocation(program, 'uLineColor');
 
     function resizeCanvas() {
       canvas.width = window.innerWidth;
@@ -612,12 +687,21 @@ document.addEventListener('DOMContentLoaded', () => {
     function render() {
       const elapsedSeconds = (Date.now() - startTime) / 1000;
 
-      gl.clearColor(0.01, 0.03, 0.07, 1.0);
+      // Extract styles dynamically from theme
+      const color1 = getThemeColorVector('--bg-color', [0.01, 0.03, 0.07, 1.0]);
+      const color2 = getThemeColorVector('--bg-card-inner', [0.04, 0.08, 0.16, 1.0]);
+      const lineC = getThemeColorVector('--color-blue', [0.0, 0.4, 1.0, 1.0]);
+
+      gl.clearColor(color1[0], color1[1], color1[2], 1.0);
       gl.clear(gl.COLOR_BUFFER_BIT);
 
       gl.useProgram(program);
       gl.uniform2f(resolutionUniform, canvas.width, canvas.height);
       gl.uniform1f(timeUniform, elapsedSeconds);
+      
+      gl.uniform4f(uBgColor1Uniform, color1[0], color1[1], color1[2], color1[3]);
+      gl.uniform4f(uBgColor2Uniform, color2[0], color2[1], color2[2], color2[3]);
+      gl.uniform4f(uLineColorUniform, lineC[0], lineC[1], lineC[2], lineC[3]);
 
       gl.bindBuffer(gl.ARRAY_BUFFER, positionBuffer);
       gl.vertexAttribPointer(positionAttrib, 2, gl.FLOAT, false, 0, 0);
@@ -1293,6 +1377,29 @@ document.addEventListener('DOMContentLoaded', () => {
       renderer.setSize(container.clientWidth, container.clientHeight);
     }
     window.addEventListener('resize', onWindowResize);
+
+    window.updateThreeDThemeColors = function() {
+      const primaryColorStr = getComputedStyle(document.body).getPropertyValue('--color-blue').trim();
+      const secondaryColorStr = getComputedStyle(document.body).getPropertyValue('--color-green').trim();
+      const bgColorStr = getComputedStyle(document.body).getPropertyValue('--bg-color').trim();
+
+      if (primaryColorStr && typeof THREE !== 'undefined') {
+        const primColor = new THREE.Color(primaryColorStr);
+        coreMaterial.color.copy(primColor);
+        coreLight.color.copy(primColor);
+      }
+      if (secondaryColorStr && typeof THREE !== 'undefined') {
+        const secColor = new THREE.Color(secondaryColorStr);
+        innerMat.color.copy(secColor);
+        ringMaterials.forEach(mat => mat.color.copy(secColor));
+      }
+      if (bgColorStr && typeof THREE !== 'undefined') {
+        const bgColor = new THREE.Color(bgColorStr);
+        scene.fog.color.copy(bgColor);
+      }
+    };
+
+    setTimeout(window.updateThreeDThemeColors, 100);
 
     animate();
   }

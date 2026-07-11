@@ -2,62 +2,184 @@
    NEWZENBOOKK CORE DESIGN SYSTEM
    ========================================================================== */
 
-:root {
-  /* Core Color Tokens - Dark Mode Default */
-  --bg-color: #030712;
-  --bg-card: rgba(10, 15, 30, 0.45);
-  --bg-card-hover: rgba(15, 25, 50, 0.6);
-  --bg-card-inner: rgba(5, 8, 18, 0.4);
-  --border-glow: rgba(0, 102, 255, 0.12);
-  --border-active: rgba(0, 102, 255, 0.5);
+:root, body.theme-zen-sand {
+  --bg-color: #f6f1e5;
+  --bg-card: rgba(240, 235, 222, 0.7);
+  --bg-card-hover: rgba(230, 225, 212, 0.9);
+  --bg-card-inner: rgba(246, 241, 229, 0.8);
+  --border-glow: rgba(58, 159, 136, 0.12);
+  --border-active: rgba(241, 104, 67, 0.5);
   
-  --color-blue: #0066ff;
+  --color-blue: #f16843;
+  --color-green: #3a9f88;
+  --color-purple: #dcb251;
+  
+  --text-primary: #362d29;
+  --text-muted: rgba(54, 45, 41, 0.75);
+  --text-dark: rgba(54, 45, 41, 0.45);
+  
+  --gemini-gradient: linear-gradient(75deg, #f16843 10%, #dcb251 45%, #3a9f88 75%, #f16843 95%);
+  --hero-bg: radial-gradient(circle at center, #fbf7ef 0%, #f6f1e5 100%);
+  --bg-nav: rgba(246, 241, 229, 0.8);
+  --bg-terminal: rgba(255, 255, 255, 0.9);
+  --canvas-opacity: 0.25;
+  
+  --shadow-premium: 0 20px 40px rgba(54, 45, 41, 0.08);
+  --shadow-purple: 0 0 15px rgba(241, 104, 67, 0.15);
+  
+  --font-display: 'Space Grotesk', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  --font-body: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  --font-mono: 'JetBrains Mono', monospace;
+}
+
+body.theme-sui-cyber {
+  --bg-color: #090d16;
+  --bg-card: rgba(13, 19, 33, 0.55);
+  --bg-card-hover: rgba(20, 30, 52, 0.7);
+  --bg-card-inner: rgba(8, 12, 21, 0.5);
+  --border-glow: rgba(0, 242, 254, 0.12);
+  --border-active: rgba(0, 242, 254, 0.5);
+  
+  --color-blue: #00f2fe;
   --color-green: #10b981;
-  --color-purple: #00d2ff;
+  --color-purple: #9b51e0;
   
   --text-primary: #ffffff;
   --text-muted: rgba(255, 255, 255, 0.7);
   --text-dark: rgba(255, 255, 255, 0.4);
   
-  --gemini-gradient: linear-gradient(75deg, #0066ff 10%, #00d2ff 45%, #3b82f6 75%, #0066ff 95%);
-  --hero-bg: radial-gradient(circle at center, #0b1528 0%, #030712 100%);
-  --bg-nav: rgba(3, 7, 18, 0.75);
-  --bg-terminal: rgba(3, 7, 18, 0.9);
-  --canvas-opacity: 1.0;
+  --gemini-gradient: linear-gradient(75deg, #00f2fe 10%, #9b51e0 50%, #00f2fe 90%);
+  --hero-bg: radial-gradient(circle at center, #111a2d 0%, #090d16 100%);
+  --bg-nav: rgba(9, 13, 22, 0.85);
+  --bg-terminal: rgba(6, 9, 15, 0.95);
+  --canvas-opacity: 0.95;
   
-  /* Typography */
+  --shadow-premium: 0 20px 50px rgba(0, 0, 0, 0.5);
+  --shadow-purple: 0 0 20px rgba(0, 242, 254, 0.25);
+  
   --font-display: 'Space Grotesk', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
   --font-body: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
   --font-mono: 'JetBrains Mono', monospace;
-  
-  --shadow-premium: 0 20px 50px rgba(0, 0, 0, 0.5);
-  --shadow-purple: 0 0 20px rgba(0, 102, 255, 0.25);
 }
 
-:root.light-mode {
-  /* Core Color Tokens - Light Mode Override */
-  --bg-color: #f8fafc;
-  --bg-card: rgba(255, 255, 255, 0.7);
-  --bg-card-hover: rgba(255, 255, 255, 0.9);
-  --bg-card-inner: rgba(241, 245, 249, 0.8);
-  --border-glow: rgba(0, 102, 255, 0.08);
-  --border-active: rgba(0, 102, 255, 0.4);
+body.theme-olive-sage {
+  --bg-color: #eff1eb;
+  --bg-card: rgba(230, 233, 225, 0.75);
+  --bg-card-hover: rgba(220, 224, 214, 0.9);
+  --bg-card-inner: rgba(239, 241, 235, 0.8);
+  --border-glow: rgba(138, 133, 99, 0.18);
+  --border-active: rgba(138, 133, 99, 0.5);
   
-  --color-blue: #0066ff;
-  --color-green: #059669;
-  --color-purple: #0ea5e9;
+  --color-blue: #8a8563;
+  --color-green: #3a9f88;
+  --color-purple: #9c9670;
   
-  --text-primary: #0a0b14;
-  --text-muted: rgba(10, 11, 20, 0.7);
-  --text-dark: rgba(10, 11, 20, 0.4);
+  --text-primary: #3a3d32;
+  --text-muted: rgba(58, 61, 50, 0.75);
+  --text-dark: rgba(58, 61, 50, 0.45);
   
-  --hero-bg: radial-gradient(circle at center, #f1f5f9 0%, #f8fafc 100%);
-  --bg-nav: rgba(248, 250, 252, 0.8);
-  --bg-terminal: rgba(255, 255, 255, 0.95);
-  --canvas-opacity: 0.15;
+  --gemini-gradient: linear-gradient(75deg, #8a8563 10%, #3a9f88 45%, #9c9670 75%, #8a8563 95%);
+  --hero-bg: radial-gradient(circle at center, #f5f7f2 0%, #eff1eb 100%);
+  --bg-nav: rgba(239, 241, 235, 0.8);
+  --bg-terminal: rgba(255, 255, 255, 0.9);
+  --canvas-opacity: 0.25;
   
-  --shadow-premium: 0 20px 40px rgba(0, 102, 255, 0.05);
-  --shadow-purple: 0 0 15px rgba(0, 102, 255, 0.1);
+  --shadow-premium: 0 20px 40px rgba(58, 61, 50, 0.08);
+  --shadow-purple: 0 0 15px rgba(138, 133, 99, 0.15);
+  
+  --font-display: 'Space Grotesk', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  --font-body: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  --font-mono: 'JetBrains Mono', monospace;
+}
+
+body.theme-slate-orchid {
+  --bg-color: #e6e8f2;
+  --bg-card: rgba(220, 223, 235, 0.75);
+  --bg-card-hover: rgba(210, 214, 227, 0.9);
+  --bg-card-inner: rgba(230, 232, 242, 0.8);
+  --border-glow: rgba(214, 168, 214, 0.18);
+  --border-active: rgba(214, 168, 214, 0.5);
+  
+  --color-blue: #d6a8d6;
+  --color-green: #5a9bb8;
+  --color-purple: #b5a4b5;
+  
+  --text-primary: #1e293b;
+  --text-muted: rgba(30, 41, 59, 0.75);
+  --text-dark: rgba(30, 41, 59, 0.45);
+  
+  --gemini-gradient: linear-gradient(75deg, #d6a8d6 10%, #5a9bb8 45%, #b5a4b5 75%, #d6a8d6 95%);
+  --hero-bg: radial-gradient(circle at center, #edf0f8 0%, #e6e8f2 100%);
+  --bg-nav: rgba(230, 232, 242, 0.8);
+  --bg-terminal: rgba(255, 255, 255, 0.9);
+  --canvas-opacity: 0.25;
+  
+  --shadow-premium: 0 20px 40px rgba(30, 41, 59, 0.08);
+  --shadow-purple: 0 0 15px rgba(214, 168, 214, 0.15);
+  
+  --font-display: 'Space Grotesk', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  --font-body: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  --font-mono: 'JetBrains Mono', monospace;
+}
+
+body.theme-terracotta-rust {
+  --bg-color: #eae0d5;
+  --bg-card: rgba(224, 213, 201, 0.75);
+  --bg-card-hover: rgba(214, 201, 187, 0.9);
+  --bg-card-inner: rgba(234, 224, 213, 0.8);
+  --border-glow: rgba(163, 88, 77, 0.18);
+  --border-active: rgba(163, 88, 77, 0.5);
+  
+  --color-blue: #a3584d;
+  --color-green: #dcb251;
+  --color-purple: #b06254;
+  
+  --text-primary: #362d29;
+  --text-muted: rgba(54, 45, 41, 0.75);
+  --text-dark: rgba(54, 45, 41, 0.45);
+  
+  --gemini-gradient: linear-gradient(75deg, #a3584d 10%, #dcb251 45%, #b06254 75%, #a3584d 95%);
+  --hero-bg: radial-gradient(circle at center, #f2ebd9 0%, #eae0d5 100%);
+  --bg-nav: rgba(234, 224, 213, 0.8);
+  --bg-terminal: rgba(255, 255, 255, 0.9);
+  --canvas-opacity: 0.25;
+  
+  --shadow-premium: 0 20px 40px rgba(54, 45, 41, 0.08);
+  --shadow-purple: 0 0 15px rgba(163, 88, 77, 0.15);
+  
+  --font-display: 'Space Grotesk', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  --font-body: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  --font-mono: 'JetBrains Mono', monospace;
+}
+
+body.theme-midnight-gold {
+  --bg-color: #181615;
+  --bg-card: rgba(30, 28, 27, 0.65);
+  --bg-card-hover: rgba(42, 40, 38, 0.8);
+  --bg-card-inner: rgba(20, 18, 17, 0.5);
+  --border-glow: rgba(223, 180, 70, 0.12);
+  --border-active: rgba(223, 180, 70, 0.5);
+  
+  --color-blue: #dfb446;
+  --color-green: #f16843;
+  --color-purple: #362d29;
+  
+  --text-primary: #f5f0e1;
+  --text-muted: rgba(245, 240, 225, 0.7);
+  --text-dark: rgba(245, 240, 225, 0.4);
+  
+  --gemini-gradient: linear-gradient(75deg, #dfb446 10%, #f16843 50%, #dfb446 90%);
+  --hero-bg: radial-gradient(circle at center, #262422 0%, #181615 100%);
+  --bg-nav: rgba(24, 22, 21, 0.85);
+  --bg-terminal: rgba(15, 13, 12, 0.95);
+  --canvas-opacity: 0.85;
+  
+  --shadow-premium: 0 20px 50px rgba(0, 0, 0, 0.6);
+  --shadow-purple: 0 0 20px rgba(223, 180, 70, 0.25);
+  
+  --font-display: 'Space Grotesk', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  --font-body: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  --font-mono: 'JetBrains Mono', monospace;
 }
 
 /* ==========================================================================
@@ -1688,9 +1810,9 @@ body {
   left: 15px;
   width: 40px;
   height: 32px;
-  background: linear-gradient(135deg, #ffffff 0%, #e0e0e0 100%);
-  border-radius: 20px 20px 15px 15px;
-  box-shadow: 0 4px 15px rgba(0,0,0,0.25), inset 0 -3px 6px rgba(0,0,0,0.1), 0 0 10px rgba(0, 102, 255, 0.2);
+  background: var(--color-green);
+  border-radius: 20px 20px 0 0;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
   z-index: 5;
   transform: translateZ(5px);
   transition: transform 0.25s cubic-bezier(0.2, 0.8, 0.2, 1);
@@ -1698,24 +1820,22 @@ body {
 
 .bot-face {
   position: absolute;
-  top: 8px;
-  left: 6px;
-  width: 28px;
+  top: 10px;
+  left: 12px;
+  width: 16px;
   height: 16px;
-  background: #0a0b14;
-  border-radius: 10px;
+  background: #ffffff;
+  border-radius: 50%;
   display: flex;
-  justify-content: space-around;
+  justify-content: center;
   align-items: center;
-  padding: 0 4px;
 }
 
 .bot-eye {
   width: 6px;
   height: 6px;
-  background: var(--color-purple);
+  background: #362d29;
   border-radius: 50%;
-  box-shadow: 0 0 8px var(--color-purple);
   animation: bot-blink 5s infinite;
 }
 
@@ -1724,65 +1844,24 @@ body {
   98% { transform: scaleY(0.1); }
 }
 
-.bot-antenna {
-  position: absolute;
-  top: -10px;
-  left: 18px;
-  width: 4px;
-  height: 12px;
-  background: #cccccc;
-  border-radius: 2px;
-  transform-origin: bottom center;
-}
-
-.bot-antenna::after {
-  content: '';
-  position: absolute;
-  top: -4px;
-  left: -2px;
-  width: 8px;
-  height: 8px;
-  background: var(--color-purple);
-  border-radius: 50%;
-  box-shadow: 0 0 8px var(--color-purple);
-}
-
 .bot-torso {
   position: absolute;
-  top: 30px;
+  top: 32px;
   left: 17px;
   width: 36px;
-  height: 40px;
-  background: linear-gradient(135deg, #f5f5f7 0%, #d2d2d7 100%);
-  border-radius: 12px 12px 18px 18px;
-  box-shadow: 0 6px 15px rgba(0,0,0,0.2), inset 0 2px 4px rgba(255,255,255,0.6);
+  height: 36px;
+  background: var(--color-blue);
+  border-radius: 4px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
   z-index: 3;
-}
-
-.bot-chest-glow {
-  position: absolute;
-  top: 10px;
-  left: 11px;
-  width: 14px;
-  height: 14px;
-  background: rgba(0, 102, 255, 0.1);
-  border: 2px solid var(--color-purple);
-  border-radius: 50%;
-  box-shadow: 0 0 10px rgba(0, 102, 255, 0.5);
-  animation: chest-pulse 2s infinite ease-in-out;
-}
-
-@keyframes chest-pulse {
-  0%, 100% { transform: scale(1); opacity: 0.7; }
-  50% { transform: scale(1.15); opacity: 1; box-shadow: 0 0 15px var(--color-purple); }
 }
 
 .bot-arm {
   position: absolute;
-  top: 32px;
+  top: 34px;
   width: 10px;
-  height: 28px;
-  background: #e0e0e0;
+  height: 24px;
+  background: var(--color-purple);
   border-radius: 5px;
   box-shadow: 0 3px 6px rgba(0,0,0,0.15);
   z-index: 2;
@@ -1817,7 +1896,7 @@ body {
   left: 28px;
   width: 14px;
   height: 10px;
-  background: #55555d;
+  background: #362d29;
   border-radius: 3px 3px 6px 6px;
   z-index: 1;
 }
@@ -1832,7 +1911,7 @@ body {
   background: linear-gradient(to bottom, var(--color-blue), transparent);
   border-radius: 50% 50% 0 0;
   animation: flame-pulse 0.2s infinite alternate;
-  box-shadow: 0 4px 10px rgba(0, 102, 255, 0.6);
+  box-shadow: 0 4px 10px var(--color-blue);
 }
 
 @keyframes flame-pulse {
@@ -2268,4 +2347,55 @@ body {
     margin: 20px auto !important;
     height: 200px;
   }
+}
+
+/* ==========================================================================
+   FLOATING SIX-THEME SWITCHER DOCK
+   ========================================================================== */
+
+.theme-switcher-dock {
+  position: fixed;
+  bottom: 24px;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 1001;
+  background: var(--bg-nav);
+  backdrop-filter: blur(24px) saturate(180%);
+  -webkit-backdrop-filter: blur(24px) saturate(180%);
+  border: 1px solid var(--border-glow);
+  padding: 8px 16px;
+  border-radius: 30px;
+  box-shadow: var(--shadow-premium);
+  display: flex;
+  gap: 12px;
+  align-items: center;
+  transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+  pointer-events: auto;
+}
+
+.theme-switcher-dock:hover {
+  transform: translateX(-50%) translateY(-2px);
+  border-color: var(--border-active);
+  box-shadow: 0 12px 30px rgba(0, 0, 0, 0.25);
+}
+
+.theme-option-btn {
+  width: 22px;
+  height: 22px;
+  border-radius: 50%;
+  border: 2px solid rgba(255, 255, 255, 0.3);
+  cursor: pointer;
+  outline: none;
+  transition: all 0.2s cubic-bezier(0.2, 0.8, 0.2, 1);
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+}
+
+.theme-option-btn:hover {
+  transform: scale(1.3);
+}
+
+.theme-option-btn.active {
+  transform: scale(1.3);
+  border-color: var(--text-primary) !important;
+  box-shadow: 0 0 12px var(--color-blue);
 }
